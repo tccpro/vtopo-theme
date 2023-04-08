@@ -1,0 +1,292 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "5e78cff1-dc5e-4804-9148-aa0bb45aa65d": {
+          "type": "shopify:\/\/apps\/product-reviews\/blocks\/star_rating\/bae150af-8da8-48b2-9867-398188115e5f",
+          "settings": {
+            "stars_fill_color": "#ff6d6d",
+            "star_size": 15,
+            "text_align": "flex-start",
+            "product": "{{product}}",
+            "stars_text_empty": "Pas encore d'avis"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": true
+          }
+        },
+        "inventory_status": {
+          "type": "inventory_status",
+          "settings": {
+            "inventory_threshold": 2,
+            "inventory_transfers_enable": true
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": true
+          }
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "4bdc94a4-2afb-4b9a-adad-fe7d596e1e8e": {
+          "type": "custom",
+          "settings": {
+            "code": "<div class=\"product-block product-block--sales-point\">\n\t<ul class=\"sales-points\">\n\t\t{% if product.metafields.custom.traces_gps_incluses == true %}\n\t\t\t<li class=\"sales-point\">\n\t\t\t\t<span class=\"icon-and-text\" style=\"color:red;\">\n\t\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-gift\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}<\/style><\/defs><path class=\"a\" d=\"M9 20.23h46v8.68H9zM13.34 28.91h36.89v24.3H13.34zM27.82 20.66v32.98M35.91 20.88v32.98M20.52 11.43a3.73 3.73 0 0 0-.74 2.87 4.57 4.57 0 0 0 .8 2.27C22 18.09 25.15 20 32 20.23a12 12 0 0 0-2.43-7 7.52 7.52 0 0 0-5.66-3.12 4 4 0 0 0-3.39 1.32z\"><\/path><path class=\"a\" d=\"M43.37 11.43a3.73 3.73 0 0 1 .74 2.87 4.48 4.48 0 0 1-.8 2.27c-1.42 1.52-4.57 3.41-11.42 3.66a12.08 12.08 0 0 1 2.43-7A7.56 7.56 0 0 1 40 10.14a4 4 0 0 1 3.37 1.29z\"><\/path><\/svg>\n\t\t\t\t\t<span>NOUVEAUTÉ CHEZ VTOPO : Traces GPS incluses !!!<\/span>\n\t\t\t\t<\/span>\n\t\t\t<\/li>\n\t\t{% endif %}\n\t\t\t<li class=\"sales-point\">\n\t\t\t\t<span class=\"icon-and-text\" style=\"color:blue;\">\n\t\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-circle-checkmark\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}<\/style><\/defs><path class=\"a\" d=\"M52.68 24.48A22 22 0 1 1 47 15.93M21 32l8.5 8.5L57 13\"><\/path><\/svg>\n\t\t\t\t\t<span>100% eBike VTTAE (VTT à Assistance Éléctrique)<\/span>\n\t\t\t\t<\/span>\n\t\t\t<\/li>\n\t\t{% if product.metafields.custom.papier_ecologique == true %}\n\t\t\t<li class=\"sales-point\">\n\t\t\t\t<span class=\"icon-and-text\" style=\"color:green;\">\n\t\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-leaf\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}<\/style><\/defs><path class=\"a\" d=\"M52 11L13 50M35 13v15h16\"><\/path><path class=\"a\" d=\"M52 11c6 24-16.72 47.29-33 32C7 22 29 10 52 11z\"><\/path><\/svg>\n\t\t\t\t\t<span>Papier écologique, label Imprim’Vert<\/span>\n\t\t\t\t<\/span>\n\t\t\t<\/li>\n\t\t{% endif %}\n\t\t{% if product.metafields.custom.zones != blank %}\n\t\t\t<li class=\"sales-point\">\n\t\t\t\t<span class=\"icon-and-text\">\n\t\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-globe\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}<\/style><\/defs><circle class=\"a\" cx=\"32\" cy=\"32\" r=\"22\"><\/circle><path class=\"a\" d=\"M13 21h38M10 32h44M13 43h38M32 10c-12 8-12 37 0 44M32 10c12 8 12 37 0 44\"><\/path><\/svg>\n\t\t\t\t\t<span style=\"text-transform: uppercase;\">{{ product.metafields.custom.zones | metafield_text }}<\/span>\n\t\t\t\t<\/span>\n\t\t\t<\/li>\n\t\t{% endif %}\n\t<\/ul>\n<\/div>"
+          }
+        },
+        "2109ac3c-844a-4313-8837-0a4484408976": {
+          "type": "custom",
+          "settings": {
+            "code": "{{ product.description | split: '<!-- split -->' | first }}"
+          }
+        },
+        "64c984d4-7918-4a82-81bd-5e3d1b9a012c": {
+          "type": "trust_badge",
+          "settings": {
+            "trust_image": "shopify:\/\/shop_images\/vtopo_blanc.png"
+          }
+        }
+      },
+      "block_order": [
+        "5e78cff1-dc5e-4804-9148-aa0bb45aa65d",
+        "price",
+        "variant_picker",
+        "inventory_status",
+        "buy_buttons",
+        "separator",
+        "4bdc94a4-2afb-4b9a-adad-fe7d596e1e8e",
+        "2109ac3c-844a-4313-8837-0a4484408976",
+        "64c984d4-7918-4a82-81bd-5e3d1b9a012c"
+      ],
+      "settings": {
+        "sku_enable": false,
+        "image_position": "left",
+        "image_size": "small",
+        "product_zoom_enable": true,
+        "thumbnail_position": "beside",
+        "thumbnail_height": "flexible",
+        "thumbnail_arrows": true,
+        "mobile_layout": "partial",
+        "enable_video_looping": true,
+        "product_video_style": "muted"
+      }
+    },
+    "sub": {
+      "type": "product-full-width",
+      "blocks": {
+        "e104b5f6-b8e2-451b-aa5e-aac4520eb45d": {
+          "type": "custom",
+          "settings": {
+            "code": "{{ product.description | split: '<!-- split -->' | last }}"
+          }
+        },
+        "373dfa80-e8a7-4074-9bf3-92339d218895": {
+          "type": "custom",
+          "settings": {
+            "code": "<ul>\n\t{% if product.metafields.my_fields.pays != blank %}<li>Pays : {{ product.metafields.my_fields.pays | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.my_fields.region != blank %}<li>Région(s) : {{ product.metafields.my_fields.region | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.my_fields.departement != blank %}<li>Département(s) : {{ product.metafields.my_fields.departement | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.custom.nombre_itineraires.value != blank %}<li>{{ product.metafields.custom.nombre_itineraires.value }} circuits tous niveaux<\/li>{% endif %}\n\t<li>Tracé précis sur fond de carte IGN, explicatifs des itinéraires<\/li>\n\t<li>Carte résistante au format pratique{% if product.metafields.custom.format != blank %} ({{ product.metafields.custom.format | metafield_text }} fermée){% endif %} et très légere {{ product.variants.first.weight | weight_with_unit }}<\/li>\n\t<li>Traces GPS au format GPX compatibes smartphones et GPS portables<\/li>\n\t<li>Avec le système de cotation technique VTOPO de V1 à V6<\/li>\n\t<li>Photos<\/li>\n\t{% if product.metafields.custom.langues != blank %}<li>Langue(s) : {{ product.metafields.custom.langues | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.custom.auteurs != blank %}<li>Auteur(s) : {{ product.metafields.custom.auteurs | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.custom.preface != blank %}<li>Préface : {{ product.metafields.custom.preface | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.my_fields.isbn != blank %}<li>ISBN : {{ product.metafields.my_fields.isbn | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.my_fields.date_de_parution != blank %}<li>Date de parution : {{ product.metafields.my_fields.date_de_parution | metafield_text }}<\/li>{% endif %}\n<\/ul>"
+          }
+        },
+        "f4152e7c-2c12-4088-b768-d30c022e5e41": {
+          "type": "tab",
+          "settings": {
+            "title": "Livraison",
+            "content": "<p>Livraison offerte à partir de 60€ en France métropolitaine, Andorre et Moncaco.<\/p><p>Expédié sous 48h.<\/p>",
+            "page": ""
+          }
+        },
+        "7b2cf5c8-6c7d-4ea4-a66b-859eb12dc543": {
+          "type": "tab",
+          "settings": {
+            "title": "Téléchargement",
+            "content": "<p>Un lien pour télécharger vos Traces GPS vous sera envoyé par e-mail.<\/p>",
+            "page": ""
+          }
+        },
+        "e37d5bf3-abc3-49d4-a754-abff6ae2b1c8": {
+          "type": "contact",
+          "settings": {
+            "title": "Une question à poser ?",
+            "phone": true
+          }
+        },
+        "b8c27e47-e1cf-4cba-b199-3696c638420b": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "e104b5f6-b8e2-451b-aa5e-aac4520eb45d",
+        "373dfa80-e8a7-4074-9bf3-92339d218895",
+        "f4152e7c-2c12-4088-b768-d30c022e5e41",
+        "7b2cf5c8-6c7d-4ea4-a66b-859eb12dc543",
+        "e37d5bf3-abc3-49d4-a754-abff6ae2b1c8",
+        "b8c27e47-e1cf-4cba-b199-3696c638420b"
+      ],
+      "settings": {
+        "max_width": true
+      }
+    },
+    "304f1e81-2c48-4ed0-bc55-cf13bbf1b7de": {
+      "type": "featured-video",
+      "disabled": true,
+      "settings": {
+        "title": "En vidéo",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=iSyP0Kd1dPQ",
+        "divider": false
+      }
+    },
+    "background-image-text": {
+      "type": "background-image-text",
+      "disabled": true,
+      "settings": {
+        "subtitle": "Impressive",
+        "title": "About your brand",
+        "text": "<p>Pair large text with a full-width image to draw attention to an important detail of your brand or product line.<\/p>",
+        "button_label": "",
+        "button_link": "",
+        "layout": "left",
+        "height": 550,
+        "framed": false,
+        "parallax": false,
+        "parallax_direction": "top"
+      }
+    },
+    "text-and-image": {
+      "type": "text-and-image",
+      "disabled": true,
+      "settings": {
+        "subtitle": "",
+        "title": "About your brand",
+        "text": "<p>Pair large text with an image to tell a story, explain a detail about your product, or describe a new promotion.<\/p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "align_text": "left",
+        "layout": "right",
+        "divider": false
+      }
+    },
+    "text-and-image2": {
+      "type": "text-and-image",
+      "disabled": true,
+      "settings": {
+        "subtitle": "",
+        "title": "About your brand",
+        "text": "<p>Pair large text with an image to tell a story, explain a detail about your product, or describe a new promotion.<\/p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "align_text": "left",
+        "layout": "left",
+        "divider": false
+      }
+    },
+    "16682645564befe9b1": {
+      "type": "apps",
+      "blocks": {
+        "411a58d7-226b-41e3-a219-5290fae2733c": {
+          "type": "shopify:\/\/apps\/product-reviews\/blocks\/reviews\/bae150af-8da8-48b2-9867-398188115e5f",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "411a58d7-226b-41e3-a219-5290fae2733c"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "disabled": true,
+      "blocks": {
+        "testimonials-0": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>",
+            "author": "Author's name",
+            "author_info": "Los Angeles, CA"
+          }
+        },
+        "testimonials-1": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>",
+            "author": "Author's name",
+            "author_info": "Los Angeles, CA"
+          }
+        },
+        "testimonials-2": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>",
+            "author": "Author's name",
+            "author_info": "Los Angeles, CA"
+          }
+        }
+      },
+      "block_order": [
+        "testimonials-0",
+        "testimonials-1",
+        "testimonials-2"
+      ],
+      "settings": {
+        "title": "Avis lecteurs",
+        "align_text": "center",
+        "round_images": true,
+        "color_background": "#f9f9f9",
+        "color_text": "#1c1d1d"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "product_recommendations_heading": "Vous pourriez aussi découvrir",
+        "related_count": 5
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "recent_count": 5
+      }
+    },
+    "collection-return": {
+      "type": "collection-return",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "sub",
+    "304f1e81-2c48-4ed0-bc55-cf13bbf1b7de",
+    "background-image-text",
+    "text-and-image",
+    "text-and-image2",
+    "16682645564befe9b1",
+    "testimonials",
+    "product-recommendations",
+    "recently-viewed",
+    "collection-return"
+  ]
+}

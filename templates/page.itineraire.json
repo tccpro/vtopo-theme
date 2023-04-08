@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-itineraire",
+      "settings": {
+        "api_key": "AIzaSyDkf-GHFR8RPDWe_gJgAOyPdMcbkdhUpco"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

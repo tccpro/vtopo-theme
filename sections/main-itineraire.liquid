@@ -1,0 +1,236 @@
+{%- liquid
+  assign itineraire_handle = request.path | remove: "/pages/itineraire/"
+  assign gpx = itineraire_handle | append: ".gpx" | file_url
+-%}
+
+<div class="page-width page-width--narrow page-content">
+  <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+    <a href="{{ routes.root_url }}" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+    <span class="breadcrumb__divider" aria-hidden="true">/</span>
+    <span><a href="{{ pages.itineraires.url }}">Itinéraires</a></span>
+    <span class="breadcrumb__divider" aria-hidden="true">/</span>
+    <span>{{ shop.metaobjects.itineraire[itineraire_handle].pays.value }}</span>
+    <span class="breadcrumb__divider" aria-hidden="true">/</span>
+    <span>{{ shop.metaobjects.itineraire[itineraire_handle].region.value }}</span>
+    <span class="breadcrumb__divider" aria-hidden="true">/</span>
+    <span>{{ shop.metaobjects.itineraire[itineraire_handle].departement.value }}</span>
+  </nav>
+
+  <header class="section-header ">
+    <h1 class="section-header__title">{{ shop.metaobjects.itineraire[itineraire_handle].titre | escape }}</h1>
+  </header>
+
+  <div class="rte rte--nomargin text-center">
+    <div class="enlarge-text">{{ shop.metaobjects.itineraire[itineraire_handle].description }}</div>
+  </div>
+</div>
+
+<div class="map-section display-map--{{ display_map }}"
+  data-section-id="1"
+  data-section-type="map"
+  data-aos="map-section__animation"
+>
+  <div class="map-section__overlay-wrapper">
+    <div class="animation-cropper">
+      <div class="animation-contents">
+        <div class="map-section__overlay">
+          <h3 class="text-spacing">Accès au départ</h3>
+          <div class="rte-setting text-spacing">{{ shop.metaobjects.itineraire[itineraire_handle].acces_routier_au_point_de_depart | escape }}</div>
+          <a href="https://maps.google.com?daddr={{ shop.metaobjects.itineraire[itineraire_handle].acces_routier_au_point_de_depart | escape }}" class="btn btn--small" target="_blank" rel="noopener" aria-label="{{ shop.metaobjects.itineraire[itineraire_handle].acces_routier_au_point_de_depart | escape }}">{{ 'sections.map.get_directions' | t }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="map-section__link" href="https://www.google.com/maps/place/{{ shop.metaobjects.itineraire[itineraire_handle].acces_routier_au_point_de_depart | escape }}" target="_blank" rel="noopener" aria-label="{{ shop.metaobjects.itineraire[itineraire_handle].acces_routier_au_point_de_depart | escape }}"></a>
+  <div
+    id="Map-1"
+    data-map
+    class="map-section__container map-1"
+    data-address-setting="{{ shop.metaobjects.itineraire[itineraire_handle].acces_routier_au_point_de_depart | escape }}"
+    data-api-key="{{ section.settings.api_key }}">
+  </div>
+</div>
+
+<div
+  class="text-with-icons"
+  data-section-id="{{ section.id }}"
+  data-section-type="text-with-icons"
+>
+  <div class="page-width">
+      <div
+        class="
+          text-with-icons__title
+          section-header"
+      >
+        <h2 class="text-center">Données techniques</h2>
+      </div>
+    <div
+      class="
+        text-with-icons__blocks
+        has-4-per-row"
+      data-block-count="4"
+      >
+
+      <div class="text-with-icons__block text-center" {{ block.shopify_attributes }}>
+        <div class="text-with-icons__block-icon">
+          <svg id="Calque_3" data-name="Calque 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 341 208">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="123" y="45" width="94.12" height="120"/>
+    </clipPath>
+  </defs>
+  <g class="cls-2">
+    <path class="cls-3" d="m144.69,126.72c-6.62,0-12-5.47-12-12.19s5.38-12.19,12-12.19,12,5.47,12,12.19-5.38,12.19-12,12.19m21.68-12.19c0-12.15-9.73-22.03-21.68-22.03s-21.68,9.88-21.68,22.03c0,3.56.83,6.92,2.32,9.91l19.37,40.57,19.37-40.58c1.48-2.98,2.32-6.34,2.32-9.9"/>
+    <path class="cls-3" d="m206.13,62.33c-3.35,0-6.08-2.77-6.08-6.17s2.73-6.17,6.08-6.17,6.08,2.77,6.08,6.17-2.73,6.17-6.08,6.17m0-17.33c-6.06,0-10.98,5-10.98,11.15,0,1.8.42,3.51,1.17,5.01l9.81,20.55,9.81-20.55c.75-1.51,1.17-3.21,1.17-5.01,0-6.15-4.92-11.15-10.98-11.15"/>
+    <path class="cls-3" d="m196.57,117.36c-.44-2.13-1.03-4.21-1.75-6.26-.97-2.74-2.15-5.42-3.04-8.2-1.68-5.19,1.22-9.52,1.76-10.31.95-1.38,2.06-2.64,3.24-3.83,2.26-2.28,4.76-4.32,7.37-6.19-.32-.51-.63-1.03-.93-1.55-3.75,1.49-23.08,8.36-22.6,23.5.09,3.04,1.25,5.93,1.96,8.87.34,1.42.64,2.85.82,4.3.08.66.13,1.31.18,1.97t0,0s.06,2.08-.04,2.97c-.28,2.79-.69,5.61-1.84,8.17-1.08,2.39-2.71,4.46-4.72,6.09-4.6,3.75-10.7,5.24-16.45,5.84-.28.03-.55.06-.82.08l-10.27,21.52c5.07-.32,10.12-1.03,15.05-2.26,5.8-1.45,11.45-3.64,16.53-6.89,5.06-3.24,9.42-7.64,12.32-12.98,3.03-5.59,4.25-11.99,3.98-18.34-.09-2.17-.29-4.38-.74-6.51"/>
+  </g>
+</svg>
+        </div>
+        <div class="text-with-icons__block-title">
+          <h3>{{ shop.metaobjects.itineraire[itineraire_handle].distance }} km</h3>
+        </div>
+      </div>
+
+      <div class="text-with-icons__block text-center" {{ block.shopify_attributes }}>
+        <div class="text-with-icons__block-icon">
+          <svg id="Calque_4" data-name="Calque 4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 341 208">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="102" y="41" width="119.32" height="122.6"/>
+    </clipPath>
+  </defs>
+  <g class="cls-2">
+    <path class="cls-3" d="m108.62,156.8h49.73V47.81h-49.73v108.99Zm56.35,0h49.73V47.81h-49.73v108.99Zm-59.66-115.8h112.69c1.83,0,3.32,1.52,3.32,3.4v115.8c0,1.88-1.49,3.4-3.32,3.4h-112.69c-1.83,0-3.31-1.52-3.31-3.4V44.4c0-1.88,1.48-3.4,3.31-3.4"/>
+    <path class="cls-3" d="m176.13,105.75c1.29-1.32,3.38-1.32,4.7,0l5.68,5.84v-26.81c0-1.88,1.49-3.4,3.31-3.4s3.32,1.52,3.32,3.4v26.84l5.68-5.84c1.29-1.32,3.38-1.32,4.7,0,1.29,1.32,1.29,3.47,0,4.83l-11.35,11.63c-.65.68-1.5.99-2.35.99s-1.69-.33-2.34-.99l-11.35-11.65c-1.29-1.33-1.29-3.48,0-4.83"/>
+    <path class="cls-3" d="m119.78,94l11.35-11.65c.65-.68,1.5-.99,2.34-.99s1.7.34,2.35.99l11.35,11.65c1.29,1.32,1.29,3.47,0,4.83-1.29,1.32-3.38,1.32-4.7,0l-5.68-5.85v26.84c0,1.89-1.49,3.41-3.32,3.41s-3.31-1.52-3.31-3.41v-26.84l-5.68,5.85c-1.29,1.32-3.38,1.32-4.7,0-1.29-1.33-1.29-3.48,0-4.83"/>
+  </g>
+</svg>
+        </div>
+        <div class="text-with-icons__block-title">
+          <h3>{{ shop.metaobjects.itineraire[itineraire_handle].denivelee_positive }}m | {{ shop.metaobjects.itineraire[itineraire_handle].denivelee_negative }}m</h3>
+        </div>
+      </div>
+
+      <div class="text-with-icons__block text-center" {{ block.shopify_attributes }}>
+        <div class="text-with-icons__block-icon">
+          <svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 341 208">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="99.45" y="42.34" width="123.55" height="122.66"/>
+    </clipPath>
+  </defs>
+  <g class="cls-2">
+    <path class="cls-3" d="m173.71,154.43c-1.02.25-2.06.48-3.09.67-2.69.5-4.47,3.09-3.97,5.79.25,1.32,1,2.43,2.02,3.16,1.05.74,2.4,1.07,3.77.82,1.23-.23,2.46-.49,3.68-.79,2.66-.66,4.28-3.36,3.61-6.02-.66-2.67-3.35-4.29-6.02-3.62"/>
+    <path class="cls-3" d="m210.44,87.86c.35,1.05,1.01,1.91,1.85,2.49,1.24.88,2.88,1.17,4.43.66,2.6-.87,4.02-3.68,3.15-6.28-.39-1.19-.83-2.38-1.29-3.53-1.01-2.55-3.91-3.79-6.45-2.77-2.55,1.02-3.79,3.91-2.77,6.46.39.97.76,1.97,1.09,2.97"/>
+    <path class="cls-3" d="m189.85,147.34c-.88.58-1.78,1.14-2.69,1.66-2.38,1.37-3.19,4.41-1.82,6.79.38.65.87,1.18,1.44,1.58,1.54,1.08,3.61,1.24,5.35.24,1.08-.62,2.16-1.28,3.21-1.98,2.28-1.5,2.91-4.59,1.4-6.88-1.5-2.29-4.59-2.92-6.88-1.41"/>
+    <path class="cls-3" d="m222.96,101.73c-.11-2.74-2.42-4.87-5.16-4.77-2.74.11-4.87,2.42-4.77,5.16.04,1.05.06,2.11.03,3.16-.04,1.72.8,3.25,2.11,4.17.78.55,1.72.88,2.74.91,2.75.06,5.02-2.12,5.08-4.86.02-1.25.02-2.52-.03-3.77"/>
+    <path class="cls-3" d="m209.63,134.27c-2.2-1.65-5.31-1.2-6.95.99-.64.84-1.3,1.68-1.98,2.47-1.77,2.09-1.52,5.23.56,7,.11.11.24.2.36.29,2.08,1.46,4.96,1.13,6.64-.84.81-.96,1.6-1.95,2.36-2.95,1.65-2.19,1.2-5.31-.99-6.95"/>
+    <path class="cls-3" d="m216.93,116.32c-2.62-.82-5.41.64-6.22,3.25-.32,1-.66,2-1.04,2.98-.83,2.17-.03,4.55,1.77,5.83.34.23.7.43,1.1.58,2.57.98,5.44-.31,6.41-2.87.44-1.17.86-2.36,1.23-3.56.82-2.62-.64-5.41-3.25-6.22"/>
+    <path class="cls-3" d="m152.04,155.14c-4.44-.79-8.7-2.16-12.74-4.05-.05-.02-.09-.06-.14-.07-.95-.45-1.91-.93-2.82-1.43t-.02,0c-1.69-.93-3.34-1.96-4.94-3.09-23.36-16.45-28.98-48.85-12.53-72.22,3.58-5.08,7.92-9.31,12.74-12.68.06-.04.12-.08.18-.12,17.02-11.73,40.12-12.52,58.18-.47l-3.88,5.6c-1.08,1.56-.42,2.7,1.47,2.53l16.85-1.5c1.89-.17,3.03-1.81,2.52-3.63l-4.53-16.31c-.51-1.82-1.81-2.04-2.89-.48l-3.88,5.62c-13.26-8.9-29.16-12.29-44.95-9.56-1.59.28-3.16.61-4.7,1.01,0,0-.02,0-.03,0-.06.02-.11.03-.17.05-13.62,3.49-25.49,11.43-33.96,22.76-.07.09-.15.17-.21.26-.29.38-.56.77-.83,1.15-.45.64-.89,1.29-1.32,1.95-.05.07-.09.16-.14.24-6.99,10.84-10.36,23.36-9.79,36.12,0,.04,0,.08,0,.12.06,1.24.16,2.51.29,3.75,0,.08.02.16.03.24.14,1.25.32,2.5.53,3.75,2.22,12.79,8.25,24.29,17.29,33.24.02.02.04.04.07.07,0,0,.02.02.02.02,2.42,2.39,5.06,4.6,7.91,6.61,7.44,5.24,15.73,8.71,24.63,10.31,2.7.48,5.27-1.32,5.76-4.02.49-2.7-1.31-5.28-4.01-5.77"/>
+    <path class="cls-3" d="m158.18,63.99c-2.22,0-4.02,1.8-4.02,4.02v40.04l36.62,18.93c.59.3,1.22.45,1.84.45,1.46,0,2.86-.79,3.57-2.18,1.02-1.97.25-4.4-1.73-5.41l-32.27-16.68v-35.15c0-2.22-1.8-4.02-4.02-4.02"/>
+  </g>
+</svg>
+        </div>
+        <div class="text-with-icons__block-title">
+          <h3>{{ shop.metaobjects.itineraire[itineraire_handle].horaire }}</h3>
+        </div>
+      </div>
+
+      <div class="text-with-icons__block text-center" {{ block.shopify_attributes }}>
+        <div class="text-with-icons__block-icon">
+          <svg id="Calque_5" data-name="Calque 5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 341 208">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="m96,161.35c.62-.96,1.52-1.25,2.62-1.2,1.14.05,2.28.01,3.57.01,0-.63,0-1.13,0-1.63,0-10.22,0-20.43,0-30.65,0-2.27.49-2.76,2.79-2.76,5.71,0,11.43,0,17.14,0,2.04,0,2.56.52,2.56,2.57,0,10.26,0,20.52,0,30.77,0,.5,0,1,0,1.59h9.56c0-.57,0-1.11,0-1.65,0-17.66,0-35.33,0-52.99,0-2.6.36-2.96,2.96-2.96,5.63,0,11.26,0,16.89,0,2.16,0,2.62.47,2.62,2.64,0,17.75,0,35.5,0,53.25,0,.54,0,1.09,0,1.72h9.61v-1.62c0-24.81,0-49.63,0-74.44,0-2.57.31-2.89,2.84-2.89,5.63,0,11.26,0,16.89,0,2.32,0,2.76.44,2.76,2.76,0,24.77,0,49.54,0,74.32v1.87h9.53v-1.62c0-31.62,0-63.25,0-94.87,0-2.95.21-3.15,3.22-3.15,5.5,0,11,0,16.5,0,2.32,0,2.77.45,2.77,2.74,0,31.71,0,63.42,0,95.13v1.88c1.23,0,2.4.04,3.57-.01,1.1-.05,2,.25,2.62,1.2v1.28c-.65.93-1.57,1.13-2.66,1.12-8.78-.03-17.56-.02-26.34-.02-10.74,0-21.48,0-32.23,0-13.51,0-27.03,0-40.54,0-8.87,0-17.73-.01-26.6.02-1.09,0-2.01-.19-2.66-1.12v-1.28Zm106.03-97.31v96.01h15.13v-96.01h-15.13Zm-16.91,96.06v-75.34h-15.12v75.34h15.12Zm-47.22-53.99v53.97h15.16v-53.97h-15.16Zm-32.05,53.97h15.17v-31.31h-15.17v31.31Z"/>
+  <path class="cls-1" d="m191.81,45.45c-2.76.57-5.2,1.08-7.64,1.59-1.04.22-2.08.46-3.12.66-1.49.29-2.41-.16-2.64-1.26-.23-1.12.44-1.95,1.87-2.25,4.58-.97,9.17-1.92,13.75-2.88.46-.1.91-.21,1.38-.28,1.47-.21,2.3.51,2.27,1.99-.14,5.45-.3,10.89-.47,16.33-.02.5.03,1.2-.26,1.46-.51.45-1.27.9-1.91.88-1.06-.04-1.43-.95-1.41-1.94.06-2.55.14-5.1.2-7.66.02-1.02,0-2.04,0-3.12-.08.04-.25.06-.33.16-6.26,7.36-13.71,13.38-21.57,18.9-18.44,12.93-38.06,23.7-59.08,31.88-.36.14-.71.29-1.08.38-1,.25-1.79-.05-2.19-1.03-.38-.92.04-1.85,1.07-2.27,2.01-.82,4.07-1.52,6.06-2.38,22-9.47,42.77-21.05,61.61-35.92,4.66-3.67,9.01-7.69,12.77-12.3.18-.22.35-.45.73-.96Z"/>
+</svg>
+        </div>
+        <div class="text-with-icons__block-title">
+          <h3>{{ shop.metaobjects.itineraire[itineraire_handle].difficulte }}</h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="page-width page-width--narrow">
+
+  <div class="text-center theme-block" {{ block.shopify_attributes }}>
+    <h2>Roadbook</h2>
+  </div>
+
+  <div class="text-center theme-block" {{ block.shopify_attributes }}>
+    <div class="rte">
+      <a href="{{ gpx }}" class="btn">
+        Télécharger la Trace GPS
+      </a>
+    </div>
+  </div>
+
+  <div class="theme-block" {{ block.shopify_attributes }} style="text-align: justify;">
+    <div class="rte">
+      {{ shop.metaobjects.itineraire[itineraire_handle].roadbook }}
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "settings": [
+    {
+      "id": "api_key",
+      "type": "text",
+      "label": "t:sections.map.settings.api_key.label",
+      "info": "t:sections.map.settings.api_key.info"
+    }
+  ]
+}
+{% endschema %}

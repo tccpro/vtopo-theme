@@ -1,0 +1,959 @@
+/**
+ * Define `metaoobject-table` custom element
+*/
+class MetaobjectTable extends HTMLElement {
+
+    constructor() {
+
+        super();
+
+        /**
+        * Dom elements
+        */
+        this.table = this.querySelector('.metaobject-table');
+        this.tbody = this.table.querySelector('TBODY');
+        this.filterBox = this.querySelector('.metaobject-filter');
+        this.searchInput = this.querySelector('.metaobject-search-input');
+        this.sortSelect = this.querySelector('.metaobject-sort-select');
+        this.paginationButtonBox = this.querySelector('.pagination-buttons');
+        this.totalCount = this.querySelector('.total-count-box span.total-count');
+
+        /**
+        * CONSTANTS
+        */
+        this.TYPE_SORT              = "SORT";
+        this.TYPE_RANGE             = "RANGE";
+        this.TYPE_CHECKBOX          = "CHECKBOX";
+        this.TYPE_TIME_RANGE        = "TIME_RANGE";
+        this.TYPE_NUMBER_RANGE      = "NUMBER_RANGE";
+        
+        this.ACTION_ADD             = "ACTION_ADD";
+        this.ACTION_REMOVE          = "ACTION_REMOVE";
+        
+        this.CONDITION_NUMBER_RANGE = "CONDITION_NUMBER_RANGE";
+        this.CONDITION_SORT         = "CONDITION_SORT";
+        this.CONDITION_RANGE        = "CONDITION_RANGE";
+        this.CONDITION_CHECKBOX     = "CONDITION_CHECKBOX";
+        this.CONDITION_SEARCH       = "CONDITION_SEARCH";
+        
+        this.SORT_DISTANCE_ASC      = "DISTANCE_ASC"
+        this.SORT_DISTANCE_DES      = "DISTANCE_DES"
+        this.SORT_DUREE_ASC         = "DUREE_ASC"
+        this.SORT_DUREE_DES         = "DUREE_DES"
+        this.SORT_DIFFICLUTE_ASC    = "DIFFICLUTE_ASC"
+        this.SORT_DIFFICLUTE_DES    = "DIFFICLUTE_DES"
+        this.SORT_DEPARTEMENT_ASC   = "DEPARTEMENT_ASC"
+        this.SORT_DEPARTEMENT_DES   = "DEPARTEMENT_DES"
+        this.SORT_TITRE_ASC         = "TITRE_ASC"
+        this.SORT_TITRE_DES         = "TITRE_DES"
+        
+        this.REG_EX                 = /(<([^>]+)>)/gmi;
+        this.SEPERATOR              = '_#_';
+        this.SORT_INDEX             = 0;
+
+        /**
+        * Main data
+        */
+        this.DATA = window.metaobjectsForAppPage;
+        this.CONDITIONS = new Map();
+        this.TEMP_OPTIONS = new Set();
+        this.SELECT_OPTIONS = new Set();
+
+        /**
+        * Array of header Index for filter bar
+        */
+        this.FILTERS = [10, 11, 1, 7, 3, 4, 6, 8];
+
+        /**
+        * Header Data
+        */
+        this.HEADER = [
+            {
+                index: 0,
+                type: this.TYPE_SORT,
+                visible: true,
+                label: "Titre",
+                maxLength: 15
+            },
+            {
+                index: 1,
+                type: this.TYPE_CHECKBOX,
+                visible: true,
+                label: "Département",
+                maxLength: 15
+            },
+            {
+                index: 2,
+                type: this.TYPE_CHECKBOX,
+                visible: true,
+                label: "Diff"
+            },
+            {
+                index: 3,
+                type: this.TYPE_RANGE,
+                visible: true,
+                label: "Distance",
+                unit: "km",
+                step: 0.1,
+                blockSize: 10,
+                blocks: [
+                    {
+                        label: "Jusqu’à 10 km",
+                        max: 10
+                    },
+                    {
+                        label: "10 à 20 km",
+                        min: 10,
+                        max: 20
+                    },
+                    {
+                        label: "20 à 30 km",
+                        min: 20,
+                        max: 30
+                    },
+                    {
+                        label: "30 à 40 km",
+                        min: 30,
+                        max: 40
+                    },
+                    {
+                        label: "À partir de 40 km",
+                        min: 40
+                    }
+                ]
+            },
+            {
+                index: 4,
+                type: this.TYPE_RANGE,
+                visible: true,
+                label: "Dénivelée +",
+                unit: "m",
+                step: 0.1,
+                blockSize: 300,
+                blocks: [
+                    {
+                        label: "Jusqu’à 300m",
+                        max: 300
+                    },
+                    {
+                        label: "300 à 600m",
+                        min: 300,
+                        max: 600
+                    },
+                    {
+                        label: "600 à 900m",
+                        min: 600,
+                        max: 900
+                    },
+                    {
+                        label: "900 à 1200m",
+                        min: 900,
+                        max: 1200
+                    },
+                    {
+                        label: "À partir de 1200m",
+                        min: 1200
+                    }
+                ]
+            },
+            {
+                index: 5,
+                type: this.TYPE_SORT,
+                visible: true,
+                label: "D-"
+            },
+            {
+                index: 6,
+                type: this.TYPE_RANGE,
+                visible: true,
+                label: "Durée",
+                time_formatting: true,
+                unit: '',
+                step: 1,
+                blockSize: 60,
+                blocks: [
+                    {
+                        label: "Jusqu’à 1h",
+                        max: 60
+                    }, 
+                    {
+                        label: "1 à 2h",
+                        min: 60,
+                        max: 120
+                    },
+                    {
+                        label: "2 à 3h",
+                        min: 120,
+                        max: 180
+                    },
+                    {
+                        label: "3 à 4h",
+                        min: 180,
+                        max: 240
+                    },
+                    {
+                        label: "À partir de 4h",
+                        min: 240
+                    }
+                ]
+            },
+            {
+                index: 7,
+                type: this.TYPE_CHECKBOX,
+                visible: false,
+                label: "Niveau"
+            },
+            {
+                index: 8,
+                type: this.TYPE_CHECKBOX,
+                visible: false,
+                label: "Profil",
+                isArray: true
+            },
+            {
+                index: 9,
+                type: this.TYPE_CHECKBOX,
+                visible: false,
+                label: "Discipline"
+            },
+            {
+                index: 10,
+                type: this.TYPE_CHECKBOX,
+                visible: false,
+                label: "Pays"
+            },
+            {
+                index: 11,
+                type: this.TYPE_CHECKBOX,
+                visible: false,
+                label: "Region"
+            }
+        ];
+
+        /**
+        * @Update Rows per paginantion - will be dynamic value with a select box
+        */
+        this.ROWS_PER_PAGINATION = 30;
+        this.CURRENT_PAGE_INDEX = 0;
+
+        /**
+        * Search and sort event handler bind
+        */
+        this.searchInput.addEventListener('input', this.search.bind(this));
+        this.sortSelect.addEventListener('change', this.sort.bind(this));
+
+        this.init();
+    }
+
+    init() {
+        /**
+         * Build Filter bar
+        */
+        this.drawFilterBar(this.DATA);
+
+        /**
+        * Init conditions
+        */
+        this.CONDITIONS.set(this.CONDITION_CHECKBOX, new Map());
+        this.CONDITIONS.set(this.CONDITION_RANGE, new Map());
+        this.CONDITIONS.set(this.CONDITION_SEARCH, null);
+        this.CONDITIONS.set(this.CONDITION_SORT, null);
+
+        /** 
+        * Init table
+        */
+        this.drawTable(this.DATA);
+    }
+
+    /**
+    * Search event handler
+    */
+    search(event) {
+        const keyWord = event.target.value;
+        this.setCondition({
+            type: this.CONDITION_SEARCH,
+            value: keyWord
+        });
+    }
+
+    /**
+    * Range event handler
+    * @Update
+    */
+    range(event) {
+        /**
+        * Get data-index
+        */
+        let dataIndexString = event.target.getAttribute('data-index');
+        const dataIndex = dataIndexString.split(`${this.SEPERATOR}`);
+
+        /**
+        * Get current min value and max value
+        */
+        const RANGE_MIN_VALUE = Number(document.querySelector(`input.input-range.range-input-min[data-index^="${dataIndex[0]}${this.SEPERATOR}"]`).value);
+        const RANGE_MAX_VALUE = Number(document.querySelector(`input.input-range.range-input-max[data-index^="${dataIndex[0]}${this.SEPERATOR}"]`).value);
+
+        /**
+        * Update condition in this.condistions
+        */
+        this.setCondition({
+            type: this.CONDITION_RANGE,
+            index: dataIndex[0],
+            min: RANGE_MIN_VALUE,
+            max: RANGE_MAX_VALUE
+        });
+    }
+
+    /**
+    * Fitler event handler
+    */
+    filter(event) {
+        /**
+        * Get data-index
+        */
+        let dataIndexString = event.target.getAttribute('data-index');
+        const dataIndex = dataIndexString.split(`${this.SEPERATOR}`);
+
+        /**
+        * Action define and checked class add or remove
+        */
+        let action = this.ACTION_ADD;
+        const parentLIelement = event.target.parentElement;
+        const parentULelement = parentLIelement.parentElement;
+        if (event.target.checked) {
+            /**
+            * Add `checked` class to the parent UL element and LI element
+            */
+            parentULelement.classList.add('checked');
+            parentLIelement.classList.add('checked');
+        } else {
+            /**
+            * Remove `checked` class from the parent UL element,
+            * if there is no checked INPUT element
+            */
+            if (parentULelement.querySelectorAll('input:checked').length == 0) {
+                parentULelement.classList.remove('checked');
+            }
+
+            /**
+            * Remove `checked` class from the parent LI element
+            */
+            parentLIelement.classList.remove('checked');
+
+            /**
+            * Reassign `remove` to `action`
+            */
+            action = this.ACTION_REMOVE;
+        }
+
+        /**
+        * Validate data-index
+        */
+        if (!dataIndex || dataIndex?.length != 2) return;
+
+        /**
+        * Add or Remove condition in this.condistions
+        */
+        this.setCondition({
+            type: this.CONDITION_CHECKBOX,
+            action: action,
+            index: dataIndex[0],
+            value: dataIndex[1]
+        });
+    }
+
+    /**
+    * Sort event handler
+    */
+    sort(event) {
+        const sortValue = event.target.value;
+        this.setCondition({
+            type: this.CONDITION_SORT,
+            value: sortValue
+        });
+    }
+
+    /**
+    * Set condition for filtering
+    * @Add range case
+    */
+    setCondition(obj) {
+        switch (obj.type) {
+
+            /**
+            * Range min and max value
+            */
+            case this.CONDITION_RANGE:
+                this.CONDITIONS.get(this.CONDITION_RANGE).set(obj.index, {
+                    min: obj.min,
+                    max: obj.max
+                });
+
+                break;
+
+            /**
+            * Filter options add/remove
+            */
+            case this.CONDITION_CHECKBOX:
+                let condition = this.CONDITIONS.get(this.CONDITION_CHECKBOX).get(obj.index);
+
+                condition = condition ? condition : new Set();
+
+                if (obj.action == this.ACTION_ADD) condition.add(obj.value);
+                else condition.delete(obj.value);
+
+                if (condition.size === 0) this.CONDITIONS.get(this.CONDITION_CHECKBOX).delete(obj.index);
+                else this.CONDITIONS.get(this.CONDITION_CHECKBOX).set(obj.index, condition);
+                break;
+
+            /**
+            * Search keyword 
+            */
+            case this.CONDITION_SEARCH:
+                this.CONDITIONS.set(this.CONDITION_SEARCH, obj.value);
+                break;
+
+            /**
+            * Sort 
+            */
+            case this.CONDITION_SORT:
+                this.CONDITIONS.set(this.CONDITION_SORT, obj.value);
+                break;
+            default:
+                break;
+        }
+        this.filterByConditions(obj);
+    }
+
+    /**
+    * filterByCondition
+    */
+    filterByConditions(obj) {
+
+        let data = this.DATA;
+
+        /**
+        * Apply search keyword
+        */
+        let keyword = this.CONDITIONS.get(this.CONDITION_SEARCH);
+        if (keyword != "" && keyword != null)
+            data = data.filter(item =>
+                item.findIndex((column, ind) => {
+                    /**
+                     * If the type of column is array, find keyword in array
+                     */
+                    if (this.HEADER[ind].isArray) return column.value.findIndex(val => val.toUpperCase().indexOf(keyword.toUpperCase()) > -1) > -1;
+                    else {
+                        /**
+                         * If the type of column is number for range filter, add unit to value for searching
+                         */
+                        if (this.HEADER[ind].unit) column.value += this.HEADER[ind].unit;
+                        
+                        return column.value.toUpperCase().indexOf(keyword.toUpperCase()) > -1;
+                    }
+                }) > -1
+            );
+
+        /**
+        * Apply filter options
+        */
+        this.CONDITIONS.get(this.CONDITION_CHECKBOX).forEach((value, key) => {
+            /**
+             * If the type of column is array, use findIndex property of Array object
+             */
+            if (this.HEADER[key].isArray)
+                data = data.filter(item => item[parseInt(key)].value.findIndex(subItem => value.has(subItem)) > -1);
+            else
+                data = data.filter(item => value.has(item[parseInt(key)].value));
+        });
+
+        /**
+        * Apply Range options
+        */
+        this.CONDITIONS.get(this.CONDITION_RANGE).forEach((value, key) => {
+            data = data.filter(item => {
+                return value.min <= Number(item[parseInt(key)].value) && Number(item[parseInt(key)].value) <= value.max
+            });
+        });
+
+        /**
+        * Apply sort
+        */
+        if (this.CONDITIONS.get(this.CONDITION_SORT)) {
+            data.sort((a, b) => a[this.SORT_INDEX].value.localeCompare(b[this.SORT_INDEX].value));
+            if (this.CONDITIONS.get(this.CONDITION_SORT) === 'z-a') data.reverse();
+        }
+
+        /**
+        * @Debug 
+        */
+        this.drawFilterBar(data, obj);
+        this.drawTable(data);
+    }
+
+    /**
+    * drawFilterBar
+    */
+    drawFilterBar(data, UPDATED_FILTER_OBJECT) {
+        /**
+        * To optimize run-time re-arrang `data`
+        */
+        const dataMapped = [];
+        data.map(item => {
+            item.map((field, ind) => {
+                if (!dataMapped[ind]) dataMapped[ind] = [];
+                if (field.value != "") dataMapped[ind].push(field.value);
+            })
+        });
+
+        /**
+        * @Debug
+        */
+        if (UPDATED_FILTER_OBJECT) {
+            this.TEMP_OPTIONS = new Set();
+        }
+
+        this.FILTERS.forEach(headerIndex => {
+
+            let item = this.HEADER[headerIndex];
+
+            /**
+            * If sort column or range column on range change event, return to skip creating sorting title column in filter bar section
+            */
+            if (
+                item.index == this.SORT_INDEX ||
+                (UPDATED_FILTER_OBJECT?.type == this.CONDITION_RANGE && item.index == UPDATED_FILTER_OBJECT?.index)
+            ) return;
+
+            /**
+            * Data assign to reduce calling `dataMapped` variable
+            */
+            const DATA_ENTRIES = dataMapped[item.index] ? dataMapped[item.index] : [];
+
+            /**
+            * Init config & count variable as a Map object
+            */
+            const SELECT_OPTIONS_COUNT = new Map();
+            const RANGE_CONFIGURATION = new Map();
+
+            /**
+            * TYPE CASE
+            */
+            switch (item.type) {
+                case this.TYPE_RANGE:
+                    /**
+                    * Minimium and maximium values for range bar
+                    */
+                    RANGE_CONFIGURATION.set('min', Math.min(...DATA_ENTRIES, 0));
+                    RANGE_CONFIGURATION.set('max', Math.max(...DATA_ENTRIES, 0));
+                    RANGE_CONFIGURATION.set('step', item.step);
+                    RANGE_CONFIGURATION.set('unit', item.unit);
+                    break;
+                case this.TYPE_CHECKBOX:
+                    /**
+                    * Mapping matched values & count number
+                    */
+                    DATA_ENTRIES?.forEach(key => {
+                        if (item.isArray) {
+                            key.map(k => SELECT_OPTIONS_COUNT.set(k, SELECT_OPTIONS_COUNT.has(k) ? SELECT_OPTIONS_COUNT.get(k) + 1 : 1));
+                        } else {
+                            SELECT_OPTIONS_COUNT.set(key, SELECT_OPTIONS_COUNT.has(key) ? SELECT_OPTIONS_COUNT.get(key) + 1 : 1);
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+
+            /**
+            * Create or create filter bar
+            */
+            this.updateOrCreateFilterOption({
+                label: item.label,
+                type: item.type,
+                index: item.index,
+                time_formatting: item.time_formatting,
+                options: SELECT_OPTIONS_COUNT,
+                rangeConfig: RANGE_CONFIGURATION,
+                created: (UPDATED_FILTER_OBJECT ? true : false)
+            });
+        });
+
+        if (UPDATED_FILTER_OBJECT) {
+            document.querySelectorAll(`LI.hide-option`).forEach(item => {
+                item.classList.remove('hide-option');
+            })
+            this.SELECT_OPTIONS.forEach(value => {
+                if (!this.TEMP_OPTIONS.has(value)) {
+                    document.querySelector(`UL:not(.checked) LI[data-index="${value}"]`)?.classList.add('hide-option');
+                }
+            })
+        }
+    }
+
+    /**
+    * updateOrCreateFilterOption
+    */
+    updateOrCreateFilterOption(filter) {
+
+        /**
+        * Create Case
+        */
+        if (!filter.created) {
+            /**
+            * `filter-option-box` create 
+            */
+            const filterBox = document.createElement('filter-option-box');
+            filterBox.classList.add('filter-opion-box');
+            this.filterBox.appendChild(filterBox);
+
+            /**
+            * Create LABEL element and add classname
+            */
+            const filterLabel = document.createElement('LABEL');
+            filterLabel.innerHTML = filter.label;
+            filterLabel.classList.add('filter-filter-label');
+            filterBox.appendChild(filterLabel);
+
+            /**
+            * Create UL element and add classname, set `data-row` and `data-type` attributes
+            */
+            const filterList = document.createElement('UL');
+            filterList.classList.add('filter-filters-list');
+            filterList.setAttribute('data-row', `${filter.index}`);
+            filterList.setAttribute('data-type', `${filter.type}`);
+            filterBox.appendChild(filterList);
+
+            /**
+            * Case type
+            */
+            switch (filter.type) {
+                case this.TYPE_RANGE:
+                    /**
+                    * Min, Max, Step, and Unit
+                    */
+                    const RANGE_MIN = filter.rangeConfig.get('min');
+                    const RANGE_MAX = filter.rangeConfig.get('max');
+                    const RANGE_STEP = filter.rangeConfig.get('step');
+                    const UNIT = filter.rangeConfig.get('unit');
+
+                    /**
+                    * Create LI element and add `data-index` attribute 
+                    */
+                    const rangeLabelList = document.createElement('LI');
+                    rangeLabelList.classList.add('filter-option');
+                    rangeLabelList.classList.add('range-option-li');
+                    rangeLabelList.classList.add('range-option-label-box');
+                    rangeLabelList.setAttribute('data-index', `${filter.index}${this.SEPERATOR}label-input-box`);
+                    filterList.appendChild(rangeLabelList);
+
+                    /**
+                    * Create labels for input range values
+                    */
+                    const formattingForTimeRange = (number, flag) => {
+                        if (!flag) return number;
+                        let hours = parseInt(parseInt(number) / 60);
+                        let mins = parseInt(parseInt(number) % 60);
+                        return `${hours.toString().padStart(2, 0)}:${mins.toString().padStart(2, 0)}`;
+                    }
+
+                    const rangeMinLabel = document.createElement('SPAN');
+                    rangeMinLabel.classList.add('filter-range-label-min');
+                    rangeMinLabel.innerHTML = `${formattingForTimeRange(RANGE_MIN, filter.time_formatting)}${UNIT}`;
+                    rangeLabelList.appendChild(rangeMinLabel);
+
+                    const rangeMaxLabel = document.createElement('SPAN');
+                    rangeMaxLabel.classList.add('filter-range-label-max');
+                    rangeMaxLabel.innerHTML = `${formattingForTimeRange(RANGE_MAX, filter.time_formatting)}${UNIT}`;
+                    rangeLabelList.appendChild(rangeMaxLabel);
+
+                    /**
+                    * Create LI element and add `data-index` attribute 
+                    */
+                    const rangeInputsList = document.createElement('LI');
+                    rangeInputsList.classList.add('filter-option');
+                    rangeInputsList.classList.add('range-option-li');
+                    rangeInputsList.setAttribute('data-index', `${filter.index}${this.SEPERATOR}range-input-box`);
+                    filterList.appendChild(rangeInputsList);
+
+                    /**
+                    * Insert range INPUT for minimium & maximium values
+                    */
+                    const minRangeInput = document.createElement('INPUT');
+                    minRangeInput.type = 'range';
+                    minRangeInput.min = RANGE_MIN;
+                    minRangeInput.max = RANGE_MAX;
+                    minRangeInput.step = RANGE_STEP;
+                    minRangeInput.value = RANGE_MIN;
+                    minRangeInput.classList.add('range-input-min');
+                    minRangeInput.classList.add('input-range');
+                    minRangeInput.setAttribute('data-index', `${filter.index}${this.SEPERATOR}${RANGE_MIN}`);
+                    rangeInputsList.appendChild(minRangeInput);
+                    minRangeInput.addEventListener('change', this.range.bind(this));
+
+
+                    const maxRangeInput = document.createElement('INPUT');
+                    maxRangeInput.type = 'range';
+                    maxRangeInput.min = RANGE_MIN;
+                    maxRangeInput.max = RANGE_MAX;
+                    maxRangeInput.step = RANGE_STEP;
+                    maxRangeInput.value = RANGE_MAX;
+                    maxRangeInput.classList.add('range-input-max');
+                    maxRangeInput.classList.add('input-range');
+                    maxRangeInput.setAttribute('data-index', `${filter.index}${this.SEPERATOR}${RANGE_MAX}`);
+                    rangeInputsList.appendChild(maxRangeInput);
+                    maxRangeInput.addEventListener('change', this.range.bind(this));
+
+                    const rangeBetweenFill = document.createElement('DIV');
+                    rangeBetweenFill.classList.add('range-between-fill');
+                    rangeInputsList.appendChild(rangeBetweenFill);
+
+                    const RangeBetweenFillUpdate = () => {
+                        const INPUT_MAX_VALUE = Number(maxRangeInput.value);
+                        const INPUT_MIN_VALUE = Number(minRangeInput.value);
+                        const INPUT_RANGE_MAX = Number(minRangeInput.max);
+                        const INPUT_RANGE_MIN = Number(minRangeInput.min);
+                        const TOTAL_RANGE = INPUT_RANGE_MAX - INPUT_RANGE_MIN;
+                        const CURRENT_RANGE = INPUT_MAX_VALUE - INPUT_MIN_VALUE;
+                        rangeBetweenFill.style.width = `${CURRENT_RANGE / TOTAL_RANGE * 100}%`;
+                        rangeBetweenFill.style.left = `${(INPUT_MIN_VALUE - INPUT_RANGE_MIN) / TOTAL_RANGE * 100}%`;
+                    }
+
+                    //event handlers
+                    const betweenRangeThumbBox = document.querySelector('input.range-input-max.input-range::after');
+                    minRangeInput.addEventListener('input', event => {
+                        if (Number(event.target.value) > (Number(maxRangeInput.value) - Number(RANGE_STEP))) {
+                            event.target.value = Number(maxRangeInput.value) - Number(RANGE_STEP);
+                        }
+                        RangeBetweenFillUpdate();
+                        rangeMinLabel.innerHTML = `${formattingForTimeRange(event.target.value, filter.time_formatting)}${UNIT}`;
+                    });
+                    maxRangeInput.addEventListener('input', event => {
+                        if (Number(event.target.value) < (Number(minRangeInput.value) + Number(RANGE_STEP))) {
+                            event.target.value = Number(minRangeInput.value) + Number(RANGE_STEP);
+                        }
+                        RangeBetweenFillUpdate();
+                        rangeMaxLabel.innerHTML = `${formattingForTimeRange(event.target.value, filter.time_formatting)}${UNIT}`;
+                    });
+
+                    break;
+                case this.TYPE_CHECKBOX:
+                    /**
+                    * Create LI elements and insert children elements ([key, value]) => {}
+                    */
+                    for (const filterOption of filter.options.entries()) {
+                        /**
+                        * Create LI element and add `data-index` attribute 
+                        */
+                        const filterListOne = document.createElement('LI');
+                        filterListOne.classList.add('filter-option');
+                        filterListOne.setAttribute('data-index', `${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+                        filterList.appendChild(filterListOne);
+
+                        /**
+                        * Add to manage filter option visibility
+                        */
+                        this.SELECT_OPTIONS.add(`${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+
+                        /**
+                        * Insert checkbox icon - will be updated
+                        */
+                        const checkboxIcon = document.createElement('SPAN');
+                        checkboxIcon.classList.add('filter-checkbox');
+                        filterListOne.appendChild(checkboxIcon);
+
+                        /**
+                        * Insert checkbox INPUT with name, value, type, `data-index` attributes
+                        */
+                        const checkBoxInput = document.createElement('INPUT');
+                        checkBoxInput.type = 'checkbox';
+                        checkBoxInput.name = filter.label;
+                        checkBoxInput.value = filterOption[0];
+                        checkBoxInput.classList.add('input-select');
+                        checkBoxInput.setAttribute('data-index', `${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+                        filterListOne.appendChild(checkBoxInput);
+
+                        /**
+                        * Define click eventListener 
+                        */
+                        checkBoxInput.addEventListener('click', this.filter.bind(this));
+
+                        /**
+                        * Insert checkbox LABEL
+                        */
+                        const checkboxLabel = document.createElement('SPAN');
+                        checkboxLabel.classList.add('checkbox-label');
+                        checkboxLabel.innerHTML = filterOption[0] + ` <span class="item-count">(${filterOption[1]})</span>`;
+                        filterListOne.appendChild(checkboxLabel);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /**
+        * Update Case
+        */
+        else {
+            /**
+            * Remove available-option class remove from all elements that has this class
+            */
+            document.querySelectorAll('.available-option').forEach(item => item.classList.remove('available-option'));
+
+            switch (filter.type) {
+                case this.TYPE_RANGE:
+                    /**
+                    * Min, Max, Step, and Unit
+                    */
+                    const RANGE_MIN = filter.rangeConfig.get('min');
+                    const RANGE_MAX = filter.rangeConfig.get('max');
+                    const UNIT = filter.rangeConfig.get('unit');
+
+                    /**
+                    * Update labels for input range values
+                    */
+                    const formattingForTimeRange = (number, flag) => {
+                        if (!flag) return number;
+                        let hours = parseInt(number / 60);
+                        let mins = parseInt(number % 60);
+                        return `${hours.toString().padStart(2, 0)}:${mins.toString().padStart(2, 0)}`;
+                    }
+
+                    const rangeMinLabel = document.querySelector(`LI[data-index="${filter.index}${this.SEPERATOR}label-input-box"] SPAN.filter-range-label-min`);
+                    rangeMinLabel.innerHTML = `${formattingForTimeRange(RANGE_MIN, filter.time_formatting)}${UNIT}`;
+
+                    const rangeMaxLabel = document.querySelector(`LI[data-index="${filter.index}${this.SEPERATOR}label-input-box"] SPAN.filter-range-label-max`);
+                    rangeMaxLabel.innerHTML = `${formattingForTimeRange(RANGE_MAX, filter.time_formatting)}${UNIT}`;
+
+                    /**
+                    * Update range INPUT for minimium & maximium values
+                    */
+                    const minRangeInput = document.querySelector(`LI[data-index="${filter.index}${this.SEPERATOR}range-input-box"] INPUT.range-input-min`);
+                    minRangeInput.min = RANGE_MIN;
+                    minRangeInput.max = RANGE_MAX;
+                    minRangeInput.value = RANGE_MIN;
+
+                    const maxRangeInput = document.querySelector(`LI[data-index="${filter.index}${this.SEPERATOR}range-input-box"] INPUT.range-input-max`);
+                    maxRangeInput.min = RANGE_MIN;
+                    maxRangeInput.max = RANGE_MAX;
+                    maxRangeInput.value = RANGE_MAX;
+
+                    const rangeBetweenFill = document.querySelector(`LI[data-index="${filter.index}${this.SEPERATOR}range-input-box"] .range-between-fill`);
+                    rangeBetweenFill.style.width = `100%`;
+                    rangeBetweenFill.style.left = `0`;
+
+                    break;
+                case this.TYPE_CHECKBOX:
+                    /**
+                    * Update count of matched entries @func ([key, value]) => {}
+                    */
+                    for (const filterOption of filter.options.entries()) {
+                        /**
+                        * Update count label element and add `data-index` attribute
+                        */
+                        const countOfOptionMatchedEntries = document.querySelector(`li[data-index="${filter.index}${this.SEPERATOR}${filterOption[0]}"] span.item-count`);
+                        countOfOptionMatchedEntries.innerHTML = `(${filterOption[1]})`;
+
+                        /**
+                        * Add `available-option` class to prevent hidding available options
+                        */
+                        const availableOptionOne = document.querySelector(`li[data-index="${filter.index}${this.SEPERATOR}${filterOption[0]}"]`);
+                        this.TEMP_OPTIONS.add(`${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+    * @Update_Pagination drawTable
+    */
+    drawTable(data) {
+        /**
+        * Delete origin TBODY and create new TBODY
+        */
+        const tbody = document.createElement('TBODY');
+        this.tbody.remove();
+        this.table.appendChild(tbody);
+        this.tbody = tbody;
+
+        /**
+        * Pagination button create and data reassign
+        * data = data.slice()
+        */
+        data = data.slice(this.CURRENT_PAGE_INDEX * this.ROWS_PER_PAGINATION, this.ROWS_PER_PAGINATION);
+
+        /**
+        * Update total count number
+        */
+        this.totalCount.innerHTML = data.length;
+
+        /**
+        * Create TR elements
+        */
+        data.map(item => {
+            const row = document.createElement('TR');
+            tbody.appendChild(row);
+
+            /**
+            * Create TD elements
+            */
+            item.map((column, index) => {
+                if (!this.HEADER[index].visible) return;
+                const col = document.createElement('TD');
+                col.innerHTML = column.html;
+                if (this.HEADER[index].maxLength) {
+                    let innerText = column.html.replace(this.REG_EX, '');
+                    if (innerText.length > this.HEADER[index].maxLength) {
+                        let newInnerText = innerText.slice(0, (this.HEADER[index].maxLength - 3)) + "...";
+                        col.innerHTML = column.html.replace(innerText, newInnerText);
+                        col.setAttribute('data-title', column.value);
+                    }
+                }
+                row.appendChild(col);
+            })
+        })
+    }
+}
+
+customElements.define('metaobject-table', MetaobjectTable);
+
+/**
+ * Define `filter-option-box` custom element for filter bar
+*/
+class filterOptionBox extends HTMLElement {
+    constructor() {
+        super()
+
+        this.label = this.querySelector('label.filter-filter-label');
+        this.optionList = this.querySelector('ul.filter-filters-list');
+        this.label.addEventListener('click', this.toggleUL.bind(this));
+
+        /**
+        * Event handler mapping
+        */
+        this.optionList.querySelectorAll('li.filter-option').forEach(item => {
+            item.addEventListener('click', this.toggleLI.bind(this))
+        })
+    }
+
+    /**
+    * Toggle UL element
+    */
+    toggleUL(event) {
+        if (this.classList.contains('open')) this.classList.remove('open');
+        else this.classList.add('open');
+    }
+
+    /**
+    * Toggle LI checkbox element
+    */
+    toggleLI(event) {
+        if (event.target.tagName == 'LI') event.target.querySelector('input[type="checkbox"]')?.click();
+    }
+}
+
+customElements.define('filter-option-box', filterOptionBox);

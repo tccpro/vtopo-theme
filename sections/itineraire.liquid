@@ -1,0 +1,20 @@
+{%- liquid
+  assign itineraire_handle = request.path | remove: "/pages/itineraire/"
+  assign itineraire_titre = shop.metaobjects.itineraire[itineraire_handle].titre
+-%}
+<div class="page-width">
+  <h1>{{ itineraire_titre }}</h1>
+</div>
+
+{% schema %}
+  {
+    "name": "Itinéraire",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

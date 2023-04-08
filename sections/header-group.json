@@ -1,0 +1,175 @@
+{
+  "type": "header",
+  "name": "t:sections.header-group.name",
+  "sections": {
+    "3d16d0e7-5852-43cd-88fb-ab76b8d5a979": {
+      "type": "countdown",
+      "disabled": true,
+      "blocks": {
+        "sections--15491982655686__3d16d0e7-5852-43cd-88fb-ab76b8d5a979-167853439869745ae6-0": {
+          "type": "content",
+          "settings": {
+            "heading": "VTOPO Premium",
+            "heading_size": "h2",
+            "text": "<p>Pour rouler partout en France et à l'étranger, s'informer, progresser, mieux rouler. <\/p>",
+            "content_alignment": "left"
+          }
+        },
+        "sections--15491982655686__3d16d0e7-5852-43cd-88fb-ab76b8d5a979-167853439869745ae6-1": {
+          "type": "timer",
+          "settings": {
+            "year": "2023",
+            "month": "04",
+            "day": "1",
+            "hour": "00",
+            "minute": "00",
+            "hide_timer": false,
+            "text": ""
+          }
+        },
+        "aabe2af3-8af1-4916-85ad-1cd2497cc07e": {
+          "type": "button",
+          "settings": {
+            "button_link": "shopify:\/\/products\/vtopo-premium",
+            "button": "Découvrir",
+            "button_style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "sections--15491982655686__3d16d0e7-5852-43cd-88fb-ab76b8d5a979-167853439869745ae6-0",
+        "sections--15491982655686__3d16d0e7-5852-43cd-88fb-ab76b8d5a979-167853439869745ae6-1",
+        "aabe2af3-8af1-4916-85ad-1cd2497cc07e"
+      ],
+      "settings": {
+        "layout": "banner",
+        "full_width": true,
+        "text_color": "#000000",
+        "background_color": "#ffffff",
+        "background_image": "shopify:\/\/shop_images\/Capture_d_ecran_2023-03-11_a_11.21.48.png",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "lazyload_images": true
+      }
+    },
+    "5500bed1-c69e-45e6-b9c4-a8881ed1f0cd": {
+      "type": "advanced-content",
+      "blocks": {
+        "7576fb38-87ee-444f-98b8-74f06d355ef1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logoVTOPOPremium.png",
+            "link": "shopify:\/\/products\/premium",
+            "width": "25%",
+            "alignment": "center"
+          }
+        },
+        "d01f02b2-f8a2-487a-ad84-f74313ef1814": {
+          "type": "liquid",
+          "settings": {
+            "code": "<p style=\"text-align:center;\"><strong>Nouveau :<\/strong> Accédez à tous les parcours VTOPO directement sur votre smartphone, tablette ou ordinateur.<br\/><strong>+ Un webzine pour mieux rouler :<\/strong> idées de spots, destinations de voyage, tutos, guides d’achat, tests matériel...<\/p>",
+            "width": "75%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "7576fb38-87ee-444f-98b8-74f06d355ef1",
+        "d01f02b2-f8a2-487a-ad84-f74313ef1814"
+      ],
+      "custom_css": [
+        "div {margin: 5px 0;}"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": false,
+        "lazyload_images": true
+      }
+    },
+    "385db4fb-e8f1-4568-86cb-22b874653efd": {
+      "type": "scrolling-text",
+      "disabled": true,
+      "settings": {
+        "text": "Découvrez VTOPO Premium, pour rouler partout en France et à l'étranger, s'informer, progresser, mieux rouler.",
+        "link": "shopify:\/\/products\/vtopo-premium",
+        "text_size": 30,
+        "text_spacing": true,
+        "direction": "left",
+        "speed": 300
+      }
+    },
+    "announcement": {
+      "type": "announcement",
+      "blocks": {
+        "announcement-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Tous niveaux",
+            "link_text": "Itinéraires Familles à Experts",
+            "link": ""
+          }
+        },
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Gratuit",
+            "link_text": "Livraison offerte à partir de 60€",
+            "link": ""
+          }
+        },
+        "335a036d-b72c-4ca0-834f-690566245afa": {
+          "type": "announcement",
+          "settings": {
+            "text": "Rapide",
+            "link_text": "Expédié sous 24h",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-0",
+        "announcement-1",
+        "335a036d-b72c-4ca0-834f-690566245afa"
+      ],
+      "settings": {
+        "announcement_compact": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "1524768779513": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify:\/\/shop_images\/logoVTOPO.png",
+            "desktop_logo_width": 200,
+            "mobile_logo_width": 140
+          }
+        }
+      },
+      "block_order": [
+        "1524768779513"
+      ],
+      "settings": {
+        "main_menu_link_list": "main-menu-premium",
+        "mega_menu_images": true,
+        "main_menu_alignment": "center-split",
+        "header_style": "normal",
+        "sticky_index": true,
+        "sticky_collection": false,
+        "toolbar_menu": "menue-de-la-barre-doutils",
+        "toolbar_social": true,
+        "show_locale_selector": true,
+        "show_currency_selector": true,
+        "show_currency_flags": true
+      }
+    }
+  },
+  "order": [
+    "3d16d0e7-5852-43cd-88fb-ab76b8d5a979",
+    "5500bed1-c69e-45e6-b9c4-a8881ed1f0cd",
+    "385db4fb-e8f1-4568-86cb-22b874653efd",
+    "announcement",
+    "header"
+  ]
+}

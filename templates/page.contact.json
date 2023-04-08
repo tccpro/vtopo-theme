@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Get in touch"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "enlarge_text": true,
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "align_text": "center",
+        "narrow_column": true,
+        "divider": false
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "title": "Contact us",
+        "text": "",
+        "show_phone": true,
+        "narrow_column": true
+      }
+    },
+    "6d0478b0-9bb3-45f6-b00c-ecdf572df0b9": {
+      "type": "newsletter",
+      "blocks": {
+        "template--15430728941766__6d0478b0-9bb3-45f6-b00c-ecdf572df0b9-16682731149ff509ea-0": {
+          "type": "title",
+          "settings": {
+            "title": "Sign up and save"
+          }
+        },
+        "template--15430728941766__6d0478b0-9bb3-45f6-b00c-ecdf572df0b9-16682731149ff509ea-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.<\/p>"
+          }
+        },
+        "template--15430728941766__6d0478b0-9bb3-45f6-b00c-ecdf572df0b9-16682731149ff509ea-2": {
+          "type": "form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--15430728941766__6d0478b0-9bb3-45f6-b00c-ecdf572df0b9-16682731149ff509ea-0",
+        "template--15430728941766__6d0478b0-9bb3-45f6-b00c-ecdf572df0b9-16682731149ff509ea-1",
+        "template--15430728941766__6d0478b0-9bb3-45f6-b00c-ecdf572df0b9-16682731149ff509ea-2"
+      ],
+      "settings": {
+        "color_background": "#f9f9f9",
+        "color_text": "#1c1d1d"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich-text",
+    "form",
+    "6d0478b0-9bb3-45f6-b00c-ecdf572df0b9"
+  ]
+}

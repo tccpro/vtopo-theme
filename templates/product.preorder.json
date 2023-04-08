@@ -1,0 +1,160 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": false
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": true
+          }
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "92fc6dc9-f007-4858-ad9d-d75c2080634a": {
+          "type": "custom",
+          "settings": {
+            "code": "<div class=\"product-block product-block--sales-point\">\n\t<ul class=\"sales-points\">\n\t\t<li class=\"sales-point\">\n\t\t\t<span class=\"icon-and-text\" style=\"color:red;\">\n\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-lock\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}<\/style><\/defs><path class=\"a\" d=\"M19.45 23.6v-3.2c0-7 5.89-11.75 12.55-11.75 7.21 0 12.55 5.49 12.55 11.75v3.2M10 23.6h44v31.75H10zM32 37.47v7.47\"><\/path><circle class=\"a\" cx=\"32\" cy=\"35.87\" r=\"1.6\"><\/circle><\/svg>\n\t\t\t\t{% assign edition_precedente = all_products[product.metafields.custom.edition_precedente] %}\n\t\t\t\t{% assign edition_precedente_url = edition_precedente.url %}\n\t\t\t\t<span>Ouvrage en pré-commande, livré à parution (<a href=\"{{ edition_precedente_url }}\" style=\"color: red;\">édition précédente<\/a>)<\/span>\n\t\t\t<\/span>\n\t\t<\/li>\n\t\t{% if product.metafields.custom.traces_gps_incluses == true %}\n\t\t\t<li class=\"sales-point\">\n\t\t\t\t<span class=\"icon-and-text\" style=\"color:red;\">\n\t\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-gift\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}<\/style><\/defs><path class=\"a\" d=\"M9 20.23h46v8.68H9zM13.34 28.91h36.89v24.3H13.34zM27.82 20.66v32.98M35.91 20.88v32.98M20.52 11.43a3.73 3.73 0 0 0-.74 2.87 4.57 4.57 0 0 0 .8 2.27C22 18.09 25.15 20 32 20.23a12 12 0 0 0-2.43-7 7.52 7.52 0 0 0-5.66-3.12 4 4 0 0 0-3.39 1.32z\"><\/path><path class=\"a\" d=\"M43.37 11.43a3.73 3.73 0 0 1 .74 2.87 4.48 4.48 0 0 1-.8 2.27c-1.42 1.52-4.57 3.41-11.42 3.66a12.08 12.08 0 0 1 2.43-7A7.56 7.56 0 0 1 40 10.14a4 4 0 0 1 3.37 1.29z\"><\/path><\/svg>\n\t\t\t\t\t<span>NOUVEAUTÉ CHEZ VTOPO : Traces GPS incluses !!!<\/span>\n\t\t\t\t<\/span>\n\t\t\t<\/li>\n\t\t{% endif %}\n\t\t{% if product.metafields.custom.adapte_vttae == true %}\n\t\t\t<li class=\"sales-point\">\n\t\t\t\t<span class=\"icon-and-text\" style=\"color:blue;\">\n\t\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-shield\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}<\/style><\/defs><path class=\"a\" d=\"M21.18 31.69L28.54 39l15.91-15.88\"><\/path><path class=\"a\" d=\"M53 12.54v15.24a31.41 31.41 0 0 1-3.7 14.95A25.46 25.46 0 0 1 32 56a25.46 25.46 0 0 1-17.3-13.27A31.41 31.41 0 0 1 11 27.78V12.54C24.88 13.67 32 8 32 8s7.12 5.67 21 4.54z\"><\/path><\/svg>\n\t\t\t\t\t<span>Itinéraires adaptés à la pratique du VTTAE (VTT à Assistance Éléctrique)<\/span>\n\t\t\t\t<\/span>\n\t\t\t<\/li>\n\t\t{% endif %}\n\t\t{% if product.metafields.custom.papier_ecologique == true %}\n\t\t\t<li class=\"sales-point\">\n\t\t\t\t<span class=\"icon-and-text\" style=\"color:green;\">\n\t\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-leaf\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}<\/style><\/defs><path class=\"a\" d=\"M52 11L13 50M35 13v15h16\"><\/path><path class=\"a\" d=\"M52 11c6 24-16.72 47.29-33 32C7 22 29 10 52 11z\"><\/path><\/svg>\n\t\t\t\t\t<span>Papier écologique, label Imprim’Vert<\/span>\n\t\t\t\t<\/span>\n\t\t\t<\/li>\n\t\t{% endif %}\n\t\t{% if product.metafields.custom.zones != blank %}\n\t\t\t<li class=\"sales-point\">\n\t\t\t\t<span class=\"icon-and-text\">\n\t\t\t\t\t<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-globe\" viewBox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}<\/style><\/defs><circle class=\"a\" cx=\"32\" cy=\"32\" r=\"22\"><\/circle><path class=\"a\" d=\"M13 21h38M10 32h44M13 43h38M32 10c-12 8-12 37 0 44M32 10c12 8 12 37 0 44\"><\/path><\/svg>\n\t\t\t\t\t<span style=\"text-transform: uppercase;\">{{ product.metafields.custom.zones | metafield_text }}<\/span>\n\t\t\t\t<\/span>\n\t\t\t<\/li>\n\t\t{% endif %}\n\t<\/ul>\n<\/div>"
+          }
+        },
+        "00f06b1b-31f5-45af-b9f6-b6594ae57121": {
+          "type": "custom",
+          "settings": {
+            "code": "{{ product.description | split: '<!-- split -->' | first }}"
+          }
+        },
+        "361223a0-acb3-4994-b261-167fb1a8834b": {
+          "type": "trust_badge",
+          "settings": {
+            "trust_image": "shopify:\/\/shop_images\/vtopo_blanc.png"
+          }
+        }
+      },
+      "block_order": [
+        "price",
+        "variant_picker",
+        "buy_buttons",
+        "separator",
+        "92fc6dc9-f007-4858-ad9d-d75c2080634a",
+        "00f06b1b-31f5-45af-b9f6-b6594ae57121",
+        "361223a0-acb3-4994-b261-167fb1a8834b"
+      ],
+      "settings": {
+        "sku_enable": false,
+        "image_position": "left",
+        "image_size": "small",
+        "product_zoom_enable": false,
+        "thumbnail_position": "beside",
+        "thumbnail_height": "flexible",
+        "thumbnail_arrows": true,
+        "mobile_layout": "partial",
+        "enable_video_looping": true,
+        "product_video_style": "muted"
+      }
+    },
+    "sub": {
+      "type": "product-full-width",
+      "blocks": {
+        "340f24c6-0a8c-4271-90b2-60fca3ebd592": {
+          "type": "custom",
+          "settings": {
+            "code": "{{ product.description | split: '<!-- split -->' | last }}"
+          }
+        },
+        "c1fdb7d6-3a92-442c-9f4d-2ecbd9944849": {
+          "type": "custom",
+          "settings": {
+            "code": "<ul>\n\t{% if product.metafields.my_fields.pays != blank %}<li>Pays : {{ product.metafields.my_fields.pays | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.my_fields.region != blank %}<li>Région(s) : {{ product.metafields.my_fields.region | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.my_fields.departement != blank %}<li>Département(s) : {{ product.metafields.my_fields.departement | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.custom.nombre_itineraires.value != blank %}<li>{{ product.metafields.custom.nombre_itineraires.value }} circuits détaillés avec cartes IGN<\/li>{% endif %}\n\t<li>Format pratique {{ product.metafields.custom.format | metafield_text }} et léger {{ product.variants.first.weight | weight_with_unit }}<\/li>\n\t<li>Traces GPS au format GPX compatibes smartphones et GPS portables<\/li>\n\t<li>Des infos récurrentes très utiles : variantes, région, point de vue...<\/li>\n\t<li>Avec le système de cotation technique VTOPO de V1 à V6<\/li>\n\t{% if product.metafields.custom.nombre_pages.value != blank %}<li>{{ product.metafields.custom.nombre_pages.value }} pages en couleur<\/li>{% endif %}\n\t<li>Photos<\/li>\n\t{% if product.metafields.custom.langues != blank %}<li>Langue(s) : {{ product.metafields.custom.langues | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.custom.auteurs != blank %}<li>Auteur(s) : {{ product.metafields.custom.auteurs | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.custom.preface != blank %}<li>Préface : {{ product.metafields.custom.preface | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.my_fields.isbn != blank %}<li>ISBN : {{ product.metafields.my_fields.isbn | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.my_fields.date_de_parution != blank %}<li>Date de parution : {{ product.metafields.my_fields.date_de_parution | metafield_text }}<\/li>{% endif %}\n\t{% if product.metafields.custom.edition_precedente != blank %}\n\t\t{% assign edition_precedente = all_products[product.metafields.custom.edition_precedente] %}\n\t\t{% assign edition_precedente_url = edition_precedente.url %}\n\t\t<li>Édition précédente : <a href=\"{{ edition_precedente_url }}\">{{ product.metafields.custom.edition_precedente | metafield_text }}<\/a><\/li>\n\t{% endif %}\n<\/ul>"
+          }
+        },
+        "bb50af91-3856-44d7-a95f-70779a157c27": {
+          "type": "tab",
+          "settings": {
+            "title": "Livraison",
+            "content": "<p>Livraison offerte à partir de 60€ en France métropolitaine, Andorre et Moncaco.<\/p><p>Expédié sous 48h <strong>dès parution.<\/strong><\/p>",
+            "page": ""
+          }
+        },
+        "314686e0-7f65-41c5-a50c-5a6126728003": {
+          "type": "tab",
+          "settings": {
+            "title": "Téléchargement",
+            "content": "<p>Un lien pour télécharger vos Traces GPS vous sera envoyé par e-mail <strong>dès parution.<\/strong><\/p>",
+            "page": ""
+          }
+        },
+        "34e7b33c-cf06-4bba-8cae-6b05b31c002a": {
+          "type": "tab",
+          "settings": {
+            "title": "Avertissement achat Traces GPS seules",
+            "content": "<p>Les Traces GPS sont complémentaires du contenu des topo-guide VTOPO.<\/p><p>Nous vous <strong>déconseillons d'utiliser uniquement les Traces GPS sans la consultation du topo-guide<\/strong> en question.<\/p><p>Avec ce dernier, vous aurez accès aux <a href=\"http:\/\/www.vtopo.fr\/pages\/cotation-vtt.html\" title=\"La cotation VTOPO VTT\">niveaux de difficultés<\/a>, à des recommandations, des précautions et à un descriptif détaillé, utile en cas d'erreur d'orientation. Vous aurez aussi la possibilité de visualiser des variantes et autres possibilités.<\/p>",
+            "page": ""
+          }
+        },
+        "44206f4b-4212-470c-ae4f-67a57165b093": {
+          "type": "contact",
+          "settings": {
+            "title": "Une question à poser ?",
+            "phone": true
+          }
+        },
+        "70f8fae2-b3a9-4d3f-aaa1-701634b3203d": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "340f24c6-0a8c-4271-90b2-60fca3ebd592",
+        "c1fdb7d6-3a92-442c-9f4d-2ecbd9944849",
+        "bb50af91-3856-44d7-a95f-70779a157c27",
+        "314686e0-7f65-41c5-a50c-5a6126728003",
+        "34e7b33c-cf06-4bba-8cae-6b05b31c002a",
+        "44206f4b-4212-470c-ae4f-67a57165b093",
+        "70f8fae2-b3a9-4d3f-aaa1-701634b3203d"
+      ],
+      "settings": {
+        "max_width": true
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "product_recommendations_heading": "Vous pourriez aussi découvrir",
+        "related_count": 5
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "recent_count": 5
+      }
+    },
+    "collection-return": {
+      "type": "collection-return",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "sub",
+    "product-recommendations",
+    "recently-viewed",
+    "collection-return"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "list-collections-template",
+      "settings": {
+        "title_enable": true,
+        "display_type": "all",
+        "sort": "alphabetical",
+        "grid": "4"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

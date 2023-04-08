@@ -1,0 +1,115 @@
+{
+  "sections": {
+    "7c989000-6740-4c65-a7e5-5646fcc2f750": {
+      "type": "promo-grid",
+      "blocks": {
+        "ede9847f-a3e1-4c64-b80d-918b15b907d3": {
+          "type": "banner",
+          "settings": {
+            "heading": "🎁 Carte-cadeau",
+            "text": "Pour faire plaisir à ceux qui ne restent pas sur le canapé !",
+            "link": "",
+            "label": "NOUVEAU",
+            "color_tint": "#000000",
+            "color_tint_opacity": 8,
+            "framed": true
+          }
+        }
+      },
+      "block_order": [
+        "ede9847f-a3e1-4c64-b80d-918b15b907d3"
+      ],
+      "settings": {
+        "full_width": false,
+        "gutter_size": 20,
+        "space_above": true,
+        "space_below": true
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "dropdown",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": false
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": false
+          }
+        }
+      },
+      "block_order": [
+        "separator",
+        "variant_picker",
+        "buy_buttons"
+      ],
+      "settings": {
+        "sku_enable": false,
+        "image_position": "left",
+        "image_size": "large",
+        "product_zoom_enable": true,
+        "thumbnail_position": "beside",
+        "thumbnail_height": "flexible",
+        "thumbnail_arrows": false,
+        "mobile_layout": "partial",
+        "enable_video_looping": true,
+        "product_video_style": "muted"
+      }
+    },
+    "sub": {
+      "type": "product-full-width",
+      "blocks": {
+        "b1530b84-c423-4026-b078-491f258625a0": {
+          "type": "description",
+          "settings": {
+            "is_tab": false
+          }
+        },
+        "9888e895-94b1-4d8a-8553-e514458727f1": {
+          "type": "contact",
+          "settings": {
+            "title": "Une question à poser ?",
+            "phone": true
+          }
+        },
+        "8dd21b07-a4c7-4eb0-a890-e852c493e94a": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b1530b84-c423-4026-b078-491f258625a0",
+        "9888e895-94b1-4d8a-8553-e514458727f1",
+        "8dd21b07-a4c7-4eb0-a890-e852c493e94a"
+      ],
+      "settings": {
+        "max_width": true
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "recent_count": 5
+      }
+    }
+  },
+  "order": [
+    "7c989000-6740-4c65-a7e5-5646fcc2f750",
+    "main",
+    "sub",
+    "recently-viewed"
+  ]
+}

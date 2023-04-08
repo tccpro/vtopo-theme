@@ -1,0 +1,123 @@
+{
+  "type": "footer",
+  "name": "t:sections.footer-group.name",
+  "sections": {
+    "footer-promotions": {
+      "type": "footer-promotions",
+      "blocks": {
+        "footer-promotions-0": {
+          "type": "promotion",
+          "disabled": true,
+          "settings": {
+            "enable_image": true,
+            "image": "shopify:\/\/shop_images\/6v96.jpg",
+            "title": "Site-wide promotion",
+            "text": "<p>Use this section to promote content throughout every page of your site. Add images for further impact.<\/p>",
+            "button_label": "Optional button",
+            "button_link": ""
+          }
+        },
+        "footer-promotions-1": {
+          "type": "promotion",
+          "disabled": true,
+          "settings": {
+            "enable_image": true,
+            "image": "shopify:\/\/shop_images\/P1119321.jpg",
+            "title": "Site-wide promotion",
+            "text": "<p>Use this section to promote content throughout every page of your site. Add images for further impact.<\/p>",
+            "button_label": "Optional button",
+            "button_link": ""
+          }
+        },
+        "footer-promotions-2": {
+          "type": "promotion",
+          "disabled": true,
+          "settings": {
+            "enable_image": true,
+            "image": "shopify:\/\/shop_images\/DSC7692.jpg",
+            "title": "Site-wide promotion",
+            "text": "<p>Use this section to promote content throughout every page of your site. Add images for further impact.<\/p>",
+            "button_label": "Optional button",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "footer-promotions-0",
+        "footer-promotions-1",
+        "footer-promotions-2"
+      ],
+      "settings": {
+        "hide_homepage": false,
+        "image_size": "wide"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "1525444454442": {
+          "type": "logo_social",
+          "settings": {
+            "logo": "shopify:\/\/shop_images\/vtopo_blanc.png",
+            "desktop_logo_height": 50,
+            "container_width": 15
+          }
+        },
+        "1526406521795": {
+          "type": "menu",
+          "settings": {
+            "show_footer_title": true,
+            "menu": "propos",
+            "container_width": 18
+          }
+        },
+        "55372ba8-6975-49bf-9162-2cb434c10b01": {
+          "type": "menu",
+          "settings": {
+            "show_footer_title": true,
+            "menu": "vtopo-fr",
+            "container_width": 17
+          }
+        },
+        "52a073ee-4f5a-44e1-979d-95583c10685a": {
+          "type": "custom",
+          "settings": {
+            "show_footer_title": true,
+            "title": "#FOLLOWTHEGUIDE",
+            "image": "shopify:\/\/shop_images\/P1025366.jpg",
+            "text": "<p>OFFERT : <a href=\"https:\/\/leclub.vtopo.fr\/5-parcours-vtt-offerts\/\" target=\"_blank\" title=\"Recevez votre Topo et Traces GPS !\">1 eBook + Traces GPS avec 5 parcours issus des Topo-guides VTT !<\/a><\/p>",
+            "container_width": 25
+          }
+        },
+        "1494292487693": {
+          "type": "newsletter",
+          "settings": {
+            "show_footer_title": true,
+            "title": "À ne pas manquer",
+            "text": "<p>Abonnez-vous à nos e-mails pour découvrir de nouveaux territoires en avant-première avec 35% de remise et participer à nos tirages au sort !<\/p>",
+            "container_width": 25
+          }
+        }
+      },
+      "block_order": [
+        "1525444454442",
+        "1526406521795",
+        "55372ba8-6975-49bf-9162-2cb434c10b01",
+        "52a073ee-4f5a-44e1-979d-95583c10685a",
+        "1494292487693"
+      ],
+      "settings": {
+        "show_locale_selector": true,
+        "show_currency_selector": true,
+        "show_currency_flags": true,
+        "show_payment_icons": true,
+        "show_copyright": true,
+        "copyright_text": ""
+      }
+    }
+  },
+  "order": [
+    "footer-promotions",
+    "footer"
+  ]
+}

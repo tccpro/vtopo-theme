@@ -1,0 +1,169 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "45f64724-507c-47fd-b163-fbefccbd5582": {
+      "type": "slideshow",
+      "blocks": {
+        "template--15439026946246__45f64724-507c-47fd-b163-fbefccbd5582-1669308796559e9797-0": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "Partez à l'aventure",
+            "title": "Webzine",
+            "title_size": 80,
+            "subheading": "VTOPO Premium",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify:\/\/shop_images\/00-10.jpg",
+            "parallax_direction": "top",
+            "overlay_opacity": 0
+          }
+        },
+        "template--15439026946246__45f64724-507c-47fd-b163-fbefccbd5582-1669308796559e9797-1": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "À l'assaut de\nGordes",
+            "title_size": 80,
+            "subheading": "Découverte",
+            "link": "shopify:\/\/blogs\/decouverte\/vtt-vaucluse-gordes",
+            "link_text": "Découvrir",
+            "link_2": "shopify:\/\/products\/vtt-itinerance-grande-traversee-de-vaucluse",
+            "link_text_2": "Itinéraires",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify:\/\/shop_images\/G0125257.jpg",
+            "parallax_direction": "top",
+            "overlay_opacity": 0
+          }
+        },
+        "8a5c9b62-6f94-4ff4-97ea-c9615432c5d0": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "Dans la Vallée du\nValais",
+            "title_size": 80,
+            "subheading": "Découverte",
+            "link": "shopify:\/\/blogs\/decouverte\/vtt-suisse",
+            "link_text": "Découvrir",
+            "link_2": "shopify:\/\/products\/vtt-trip-suisse-valais",
+            "link_text_2": "Itinéraires",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify:\/\/shop_images\/P1025366.jpg",
+            "parallax_direction": "top",
+            "overlay_opacity": 0
+          }
+        },
+        "a458f7a1-7cbe-4608-8962-dfc0f4bec5dc": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "Bol d'air à\nHyères",
+            "title_size": 80,
+            "subheading": "Découverte",
+            "link": "shopify:\/\/blogs\/decouverte\/hyeres",
+            "link_text": "Découvrir",
+            "link_2": "shopify:\/\/products\/vtt-var",
+            "link_text_2": "Itinéraires",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify:\/\/shop_images\/P1106259.jpg",
+            "parallax_direction": "top",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "template--15439026946246__45f64724-507c-47fd-b163-fbefccbd5582-1669308796559e9797-0",
+        "template--15439026946246__45f64724-507c-47fd-b163-fbefccbd5582-1669308796559e9797-1",
+        "8a5c9b62-6f94-4ff4-97ea-c9615432c5d0",
+        "a458f7a1-7cbe-4608-8962-dfc0f4bec5dc"
+      ],
+      "settings": {
+        "section_height": "450px",
+        "mobile_height": "auto",
+        "parallax": true,
+        "style": "bars",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "lazyload_images": true
+      }
+    },
+    "2dfca0df-057a-4bec-bbf9-d6a6283e29be": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "Découverte",
+        "blog": "decouverte",
+        "post_limit": 3,
+        "blog_show_tags": true,
+        "blog_show_date": true,
+        "blog_show_comments": true,
+        "blog_show_author": true,
+        "view_all": true,
+        "blog_image_size": "wide",
+        "divider": false
+      }
+    },
+    "0e17fcb6-7cb7-45c0-87cb-ab3dd10004d4": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "Infos",
+        "blog": "infos",
+        "post_limit": 3,
+        "blog_show_tags": true,
+        "blog_show_date": true,
+        "blog_show_comments": true,
+        "blog_show_author": true,
+        "view_all": true,
+        "blog_image_size": "wide",
+        "divider": true
+      }
+    },
+    "d5f5275f-eeb1-4615-a6bd-ce9dce893e6d": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "Tuto",
+        "blog": "tuto",
+        "post_limit": 3,
+        "blog_show_tags": true,
+        "blog_show_date": true,
+        "blog_show_comments": true,
+        "blog_show_author": true,
+        "view_all": true,
+        "blog_image_size": "wide",
+        "divider": true
+      }
+    },
+    "8d413c95-b4e0-4195-8cd3-17fe71dad122": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "Vidéos",
+        "blog": "video",
+        "post_limit": 3,
+        "blog_show_tags": true,
+        "blog_show_date": true,
+        "blog_show_comments": true,
+        "blog_show_author": true,
+        "view_all": true,
+        "blog_image_size": "wide",
+        "divider": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "45f64724-507c-47fd-b163-fbefccbd5582",
+    "2dfca0df-057a-4bec-bbf9-d6a6283e29be",
+    "0e17fcb6-7cb7-45c0-87cb-ab3dd10004d4",
+    "d5f5275f-eeb1-4615-a6bd-ce9dce893e6d",
+    "8d413c95-b4e0-4195-8cd3-17fe71dad122"
+  ]
+}

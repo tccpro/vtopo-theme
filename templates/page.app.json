@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "itineraires": {
+      "type": "itineraires",
+      "settings": {}
+    },
+    "edb83faa-bc1f-42ca-9a5d-f4a9b3c8a097": {
+      "type": "map",
+      "settings": {
+        "map_title": "Our retail store",
+        "address": "",
+        "map_address": "Saint Véran",
+        "api_key": "AIzaSyDkf-GHFR8RPDWe_gJgAOyPdMcbkdhUpco",
+        "show_button": true,
+        "lazyload_images": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "itineraires",
+    "edb83faa-bc1f-42ca-9a5d-f4a9b3c8a097"
+  ]
+}

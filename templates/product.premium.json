@@ -1,0 +1,126 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "a3fc4206-9f35-4378-9380-81dbd48ad7cc": {
+          "type": "shopify:\/\/apps\/product-reviews\/blocks\/star_rating\/bae150af-8da8-48b2-9867-398188115e5f",
+          "settings": {
+            "stars_fill_color": "#ff6d6d",
+            "star_size": 15,
+            "text_align": "flex-start",
+            "product": "{{product}}",
+            "stars_text_empty": "Pas encore d'avis"
+          }
+        },
+        "c1d67c76-83fd-41aa-93f9-fb63dff475b3": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": true
+          }
+        },
+        "e34189aa-5ee9-43b2-a256-2eb1bb455ce4": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "9d556efb-15ed-431e-8df5-99559a835d71": {
+          "type": "description",
+          "settings": {
+            "is_tab": false
+          }
+        },
+        "c7df4d31-f72a-4e3d-923f-a71ed3aa1b93": {
+          "type": "shopify:\/\/apps\/conjured-memberships\/blocks\/product-upsell\/f8dbb575-f5e2-4ca9-81e5-cae613384b89",
+          "settings": {
+            "membership_product": "",
+            "heading": "Become A Member",
+            "content": "<p>This is a great place to highlight your membership perks<\/p><ul><li>X% discount off products<\/li><li>Free shipping<\/li><li>Access to special content<\/li><\/ul>",
+            "tier_label": "Tier",
+            "plan_label": "Plans",
+            "button_text": "Join Now",
+            "css": "",
+            "membership_tag": "",
+            "every": "every",
+            "day": "day",
+            "week": "week",
+            "month": "month",
+            "year": "year"
+          }
+        }
+      },
+      "block_order": [
+        "a3fc4206-9f35-4378-9380-81dbd48ad7cc",
+        "c1d67c76-83fd-41aa-93f9-fb63dff475b3",
+        "e34189aa-5ee9-43b2-a256-2eb1bb455ce4",
+        "9d556efb-15ed-431e-8df5-99559a835d71",
+        "c7df4d31-f72a-4e3d-923f-a71ed3aa1b93"
+      ],
+      "custom_css": [],
+      "settings": {
+        "sku_enable": false,
+        "image_position": "left",
+        "image_size": "small",
+        "product_zoom_enable": false,
+        "thumbnail_position": "beside",
+        "thumbnail_height": "flexible",
+        "thumbnail_arrows": true,
+        "mobile_layout": "full",
+        "enable_video_looping": true,
+        "product_video_style": "muted"
+      }
+    },
+    "sub": {
+      "type": "product-full-width",
+      "blocks": {
+        "dc5f493e-f124-4d14-ae45-61a8570da284": {
+          "type": "contact",
+          "settings": {
+            "title": "Une question à poser ?",
+            "phone": true
+          }
+        },
+        "f3a2af32-cd6d-4b3c-b4ff-40297bdbda01": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "dc5f493e-f124-4d14-ae45-61a8570da284",
+        "f3a2af32-cd6d-4b3c-b4ff-40297bdbda01"
+      ],
+      "settings": {
+        "max_width": true
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "product_recommendations_heading": "Vous pourriez aussi découvrir",
+        "related_count": 5,
+        "products_per_row": 3
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "recent_count": 5
+      }
+    },
+    "collection-return": {
+      "type": "collection-return",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "sub",
+    "product-recommendations",
+    "recently-viewed",
+    "collection-return"
+  ]
+}

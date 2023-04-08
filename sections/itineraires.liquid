@@ -1,0 +1,680 @@
+{%- comment -%}
+  Custom style - Will be moved into theme.css.liquid or custom.css.liquid file in the future.
+{%- endcomment -%}
+{% style %}
+  #itineraire-page-{{section.id}} {
+    padding-bottom: 120px;
+  }
+  .itineraire-title {
+    text-align: center;
+  }
+  .metaobject-box {
+    display: flex;
+    width: 100%;
+    gap: 24px;
+  }
+  .metaobject-tools-box {
+    display: flex;
+    justify-content: end;
+  }
+  .metaobject-table-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .metaobject-tools-box {
+    display: flex;
+    justify-content: space-between;
+  }
+  select.metaobject-sort-select {
+    width: 200px;
+  }
+  ul.filter-filters-list {
+    list-style: none;
+  }
+  ul.filter-filters-list li {
+    transition: .3s;
+  }
+  ul.filter-filters-list li.hide-option {
+    height: 0;
+    opacity: 0;
+  }
+  .metaobject-table tr {
+    transition: .3s;
+  }
+  @media screen and (max-width: 768px) {
+    .metaobject-box {
+      flex-direction: column;
+    }
+    .metaobject-container {
+      overflow: auto;
+      padding: 0 0 15px;
+    }
+  }
+
+  filter-option-box ul.filter-filters-list {
+    margin-left: 0;
+  }
+
+  filter-option-box {
+    border-bottom: 1px solid #2b2a27;
+    border-width: thin;
+    display: block;
+  }
+
+  filter-option-box:last-child {
+    border-bottom: none;
+  }
+
+  filter-option-box label.filter-filter-label {
+    position: relative;
+    padding: 15px 15px 15px 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  filter-option-box label.filter-filter-label::after {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 50%;
+    right: 3px;
+    transform: translateY(-50%) rotate(45deg);
+    border: 2px solid #fff;
+    border-width: 0 2px 2px 0;
+    content: "";
+    transition: .15s;
+  }
+
+  filter-option-box.open label.filter-filter-label::after {
+    transform: translateY(-50%) rotate(-135deg);
+  }
+  
+  filter-option-box .filter-filters-list {
+    transition: .3s;
+    height: 0;
+    overflow: hidden;
+  }
+
+  filter-option-box.open .filter-filters-list {
+    height: auto;
+  }
+
+  filter-option-box li.filter-option {
+    cursor: pointer;
+    position: relative;
+  }
+
+  li.filter-option::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+  }
+
+  filter-option-box li.filter-option input[type="checkbox"] {
+    display: none;
+  }
+
+  filter-option-box li.filter-option span.filter-checkbox {
+    position: relative;
+    padding-left: 25px;
+  }
+
+  filter-option-box li.filter-option span.filter-checkbox::before {
+    border: 1px solid;
+    border-color: #2b2a27;
+    height: 16px;
+    width: 16px;
+  }
+
+  filter-option-box li.filter-option.checked span.filter-checkbox::after {
+    height: 10px;
+    width: 10px;
+    left: 3px;
+  }
+
+  filter-option-box li.filter-option span.filter-checkbox::after, 
+  filter-option-box li.filter-option span.filter-checkbox::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+  filter-option-box li.filter-option.checked span.filter-checkbox::after {
+    background-color: #fff;
+  }
+
+{% endstyle %}
+
+<div class="page-width" id="itineraire-page-{{section.id}}">
+  
+  <h1 class="itineraire-title">Itineraire</h1>
+  test 
+  {{ shop.metaobjects.handles.handle.handle_text }}
+  {% assign itineraire_handles = shop.metaobjects.handles.handle.handle_text  | split: ',' %}
+  {%- for itineraireHandle in itineraire_handles -%}   
+    <span>{{ forloop.index }}, </span>
+    {%- assign itineraire = shop.metaobjects.itineraire[itineraireHandle] -%}
+  {%- endfor -%}
+
+
+  <metaobject-table>
+    <div class="metaobject-box">
+      <div class="metaobject-filter">
+      </div>
+      <div class="metaobject-table-container">
+        <div class="metaobject-tools-box">
+          <div class="metaobject-search">
+            <input class="metaobject-search-input" placeholder="Search" type="text" />
+          </div>
+          <div class="metaobject-sort">
+            <select class="metaobject-sort-select">
+              <option hidden>Sort By</option>
+              <option value="a-z">Sort By A-Z</option>
+              <option value="z-a">Sort By Z-A</option>
+            </select>
+          </div>
+        </div>
+        <div class="metaobject-container">
+          <div class="total-count-box"><span class="total-count">0</span>&nbsp;<span>itineraires</span></div>
+          <table class="itineraire-table metaobject-table">
+            <thead>
+              <tr>
+                <th data-index="1" data-type="strnig" data-filter-sort>Titre</th>          
+                <th data-index="2" data-type="string" data-filter-select>Discipline</th>
+                <th data-index="3" data-type="string" data-filter-select>Pays</th>
+                <th data-index="4" data-type="string" data-filter-select>Région</th>
+                <th data-index="5" data-type="string" data-filter-select>Département</th>
+              </tr>
+            </thead>      
+            <tbody>        
+            </tbody>    
+          </table>
+          <div class="pagination-buttons">
+          </div>
+        </div>
+      </div>
+    </div>
+  </metaobject-table>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Itinéraires",
+    "settings": []
+  }
+{% endschema %}
+
+<script>
+  /**
+   * Define `metaoobject-table` custom element
+  */
+  class MetaobjectTable extends HTMLElement {
+    
+    constructor() {
+
+      super();
+      
+      /**
+      * Dom elements
+      */
+      this.table = this.querySelector('.metaobject-table');
+      this.tbody = this.table.querySelector('TBODY');
+      this.filterBox = this.querySelector('.metaobject-filter');
+      this.searchInput = this.querySelector('.metaobject-search-input');
+      this.sortSelect = this.querySelector('.metaobject-sort-select');
+      this.header = this.table.querySelectorAll('th[data-filter-select]');
+      this.sortColumn = this.table.querySelector('[data-filter-sort]');
+      this.paginationButtonBox = this.querySelector('.pagination-buttons');
+      this.totalCount = this.querySelector('.total-count-box span.total-count');
+      
+      /**
+      * Variables
+      */
+      this.sortIndex = this.sortColumn ? parseInt(this.sortColumn.getAttribute('data-index')) - 1 : 0;
+      this.regEx = /(<([^>]+)>)/gmi;
+      this.data = [];
+      this.conditions = new Map();
+      /**
+      * Rows per paginantion - will be dynamic value with a select box
+      */
+      this.rowsPerPagination = 32;
+
+      /**
+       * For the test component assigned metaobjects using liquid
+      */
+      {% assign itineraire_handles = shop.metaobjects.handles.handle.handle_text  | split: ',' %}
+      {%- for itineraireHandle in itineraire_handles -%}   
+        {%- assign itineraire = shop.metaobjects.itineraire[itineraireHandle] -%}
+        this.data.push([
+          {
+            html: `<a href="{{ shop.url }}/pages/itineraire/{{ itineraire.system.handle }}">{{ itineraire.titre.value }}</a>`,
+            value: `{{ itineraire.titre.value }}`
+          },
+          {
+            html: `{{ itineraire.discipline.value }}`,
+            value: `{{ itineraire.discipline.value }}`
+          },
+          {
+            html: `{{ itineraire.pays.value }} TEST`,
+            value: `{{ itineraire.pays.value }} TEST`
+          },
+          {
+            html: `{{ itineraire.region.value }}`,
+            value: `{{ itineraire.region.value }}`
+          },
+          {
+            html: `{{ itineraire.departement.value }}`,
+            value: `{{ itineraire.departement.value }}`
+          }
+        ]);              
+      {%- endfor -%}
+
+      /**
+      * Search and sort event handler bind
+      */
+      this.searchInput.addEventListener('input', this.search.bind(this));
+      this.sortSelect.addEventListener('change', this.sort.bind(this));
+
+      this.init();
+    }
+
+    init() {
+      /**
+       * Mapped from TABLE > THEAD > TH for the header and filter options
+      */
+      this.buildFilterBar(this.data);
+
+      /**
+      * Init conditions
+      */
+      this.conditions.set('filter', new Map());
+      this.conditions.set('search', null);
+      this.conditions.set('sort', null);
+
+      /** Init table
+      *
+      */
+      this.drawTable(this.data);
+    }
+
+    /**
+    * Search event handler
+    */
+    search(event) {
+      const keyWord = event.target.value;
+      this.setCondition({
+        type: "search",
+        value: keyWord
+      });
+    }
+
+    /**
+    * Fitler event handler
+    */
+    filter(event) {
+      /**
+      * Get data-index
+      */
+      let dataIndexString = event.target.getAttribute('data-index');
+      dataIndexString = dataIndexString.replace('-', '_%_');
+      const dataIndex = dataIndexString.split('_%_');
+
+      /**
+      * Action define and checked class add or remove
+      */
+      let action = 'add';
+      const parentLIelement = event.target.parentElement;
+      const parentULelement = parentLIelement.parentElement;
+      if (event.target.checked) {
+        /**
+        * Add `checked` class to the parent UL element and LI element
+        */
+        parentULelement.classList.add('checked');
+        parentLIelement.classList.add('checked');
+      } else {
+        /**
+        * Remove `checked` class from the parent UL element,
+        * if there is no checked INPUT element
+        */
+        if (parentULelement.querySelectorAll('input:checked').length == 0) {
+          parentULelement.classList.remove('checked');
+        }
+
+        /**
+        * Remove `checked` class from the parent LI element
+        */
+        parentLIelement.classList.remove('checked');
+        
+        /**
+        * Reassign `remove` to `action`
+        */
+        action = 'remove';
+      }
+      
+      /**
+      * Validate data-index
+      */
+      if (!dataIndex || dataIndex?.length != 2) return;
+
+      /**
+      * Add or Remove condition in this.condistions
+      */
+      this.setCondition({
+        type: 'filter',
+        action: action,
+        column: dataIndex[0],
+        value: dataIndex[1]
+      });
+    }
+
+    /**
+    * Sort event handler
+    */
+    sort(event) {
+      const sortValue = event.target.value;
+      this.setCondition({
+        type: 'sort',
+        value: sortValue
+      });
+    }
+
+    setCondition(obj) {
+      switch (obj.type) {
+
+        /**
+        * Filter options add/remove
+        */
+        case 'filter':
+          let condition = this.conditions.get('filter').get(obj.column);
+          
+          condition = condition ? condition : new Set();
+          
+          if (obj.action == 'add') condition.add(obj.value);
+          else condition.delete(obj.value);
+
+          if (condition.size === 0) this.conditions.get('filter').delete(obj.column);
+          else this.conditions.get('filter').set(obj.column, condition);
+          
+          break;
+
+        /**
+        * Search keyword 
+        */
+        case 'search': 
+          this.conditions.set('search', obj.value);
+          break;
+
+        /**
+        * Sort 
+        */
+        case 'sort': 
+          this.conditions.set('sort', obj.value);
+          break;
+        default:
+          break;
+      }
+      this.filterByConditions();
+    }
+
+    filterByConditions() {
+      /**
+      * Apply filter options
+      */
+      let data = this.data;
+
+      this.conditions.get('filter').forEach((value, key) => {
+        data = data.filter(item => value.has(item[parseInt(key)].value));
+      });
+
+      /**
+      * Apply search keyword
+      */
+      let keyword = this.conditions.get('search');
+      if (keyword != "" && keyword != null) 
+        data = data.filter(item => item.findIndex(column => column.value.toUpperCase().indexOf(keyword.toUpperCase()) < 0 ? false : true) < 0 ? false : true);
+
+      /**
+      * Apply sort
+      */
+      data.sort((a,b) => a[this.sortIndex].value.localeCompare(b[this.sortIndex].value));
+      if (this.conditions.get('sort') === 'z-a') data.reverse();
+
+      this.drawTable(data)
+    }
+
+    buildFilterBar(data) {
+      this.header.forEach(item => {
+        /**
+        * Get index for filtering
+        */
+        let itemIndex = parseInt(item.getAttribute('data-index')) - 1; // column index
+        const options = new Map();
+
+        /**
+        * Mapping matched values & count number
+        */
+        data.forEach(option => {
+          let count = 1;
+          let key = option[itemIndex].value;
+          /**
+          * If exists, add to origin value
+          */
+          if (options.has(key)) count = options.get(key) + 1;
+          options.set(key, count);
+        });
+        
+        /**
+        * Create filter bar
+        */
+        this.createFilterOption({
+          label: item.innerHTML.replace(this.regEx, ''),
+          options: options,
+          index: itemIndex
+        });
+      }); 
+    }
+
+    createFilterOption(filter) {
+      /**
+      * `filter-option-box` create 
+      */
+      const filterBox = document.createElement('filter-option-box');
+      filterBox.classList.add('filter-opion-box');
+      this.filterBox.appendChild(filterBox);
+
+
+      /**
+      * Create LABEL element and add classname
+      */
+      const filterLabel = document.createElement('LABEL');
+      filterLabel.innerHTML = filter.label;
+      filterLabel.classList.add('filter-filter-label');
+      filterBox.appendChild(filterLabel);
+      
+      /**
+      * Create UL element and add classname
+      */
+      const filterList = document.createElement('UL');
+      filterList.classList.add('filter-filters-list');
+      filterList.setAttribute('data-row', `${filter.index}`);
+      filterBox.appendChild(filterList);
+
+      /**
+      * Create LI elements and insert children elements
+      */
+      for(const filterOption of filter.options.entries()) {
+        /**
+        * Create LI element and add `data-index` attribute 
+        */
+        const filterListOne = document.createElement('LI');
+        filterListOne.classList.add('filter-option');
+        filterListOne.setAttribute('data-index', `${filter.index}-${filterOption[0]}`);
+        filterList.appendChild(filterListOne);
+
+        /**
+        * Insert checkbox icon - will be updated
+        */
+        const checkboxIcon = document.createElement('SPAN');
+        checkboxIcon.classList.add('filter-checkbox');
+        filterListOne.appendChild(checkboxIcon);
+
+        /**
+        * Insert checkbox INPUT with name, value, type, `data-index` attributes
+        */
+        const checkBoxInput = document.createElement('INPUT');
+        checkBoxInput.type = 'checkbox';
+        checkBoxInput.name = filter.label;
+        checkBoxInput.value = filterOption[0];
+        checkBoxInput.setAttribute('data-index', `${filter.index}-${filterOption[0]}`);
+        filterListOne.appendChild(checkBoxInput);
+
+        /**
+        * Define click eventListener 
+        */
+        checkBoxInput.addEventListener('click', this.filter.bind(this));
+
+        /**
+        * Insert checkbox LABEL
+        */
+        const checkboxLabel = document.createElement('SPAN');
+        checkboxLabel.classList.add('checkbox-label');
+        checkboxLabel.innerHTML = filterOption[0] + ` <span class="item-count">(${filterOption[1]})</span>`;
+        filterListOne.appendChild(checkboxLabel);
+      }
+    }
+
+    drawTable(data) {
+      /**
+      * Update numbers on the filter options
+      */
+      // Remove available-option class remove from all elements that has this class
+      document.querySelectorAll('.available-option').forEach(item => item.classList.remove('available-option'));
+      
+      this.header.forEach(item => {
+        let itemIndex = parseInt(item.getAttribute('data-index')) - 1; // column index
+        const options = new Map();
+        
+        /**
+        * Update count number of matched entries
+        */ 
+        data.forEach(option => {
+          let count = 1; // matched entires number
+          let key = option[itemIndex].value;
+          if (options.has(key)) count = options.get(key) + 1;
+          options.set(key, count);
+          
+          /**
+          * Count number update
+          */
+          const availableOption = document.querySelector(`li[data-index="${itemIndex}-${key}"] span.item-count`);
+          availableOption.innerHTML = `(${count})`;
+          availableOption.classList.add('available-option');
+          availableOption.classList.remove('hide-option');
+
+          options.forEach((value, k) => {
+            const availableOptionOne = document.querySelector(`li[data-index="${itemIndex}-${k}"]`);
+            availableOptionOne.classList.add('available-option');
+            availableOptionOne.classList.remove('hide-option');
+          });
+        });    
+
+        /**
+        * Prevent hiding checked ul li elements
+        */
+        document.querySelectorAll(`ul.checked[data-row="${itemIndex}"] li`).forEach(item => {
+          item.classList.add('available-option');
+          item.classList.remove('hide-option');
+        });
+      });
+
+      /**
+      * Hide unavailable options
+      */
+      document.querySelectorAll(`li[data-index]:not(.available-option)`).forEach(item => {
+        item.classList.add('hide-option');
+      });      
+
+      /**
+      * Delete origin TBODY and create new TBODY
+      */
+      const tbody = document.createElement('TBODY');
+      this.tbody.remove();
+      this.table.appendChild(tbody);
+      this.tbody = tbody;
+
+      /**
+      * Update total count number
+      */
+      this.totalCount.innerHTML = data.length;
+
+      /**
+      * Create TR elements
+      */
+      /**
+      * Pagination button create and data reassign
+      * data = data.slice()
+      */
+      data.map(item => {
+        const row = document.createElement('TR');
+        tbody.appendChild(row);
+        
+        /**
+        * Create TD elements
+        */
+        item.map(column => {
+          const col = document.createElement('TD');
+          col.innerHTML = column.html;
+          row.appendChild(col);
+        })
+      })
+      
+    }
+  }
+
+  customElements.define('metaobject-table', MetaobjectTable);
+
+  /**
+   * Define `filter-option-box` custom element for filter bar
+  */
+  class filterOptionBox extends HTMLElement {
+    constructor() {
+      super()
+
+      this.label = this.querySelector('label.filter-filter-label');
+      this.optionList = this.querySelector('ul.filter-filters-list');
+      this.label.addEventListener('click', this.toggleUL.bind(this));
+
+      /**
+      * Event handler mapping
+      */
+      this.optionList.querySelectorAll('li.filter-option').forEach(item => {
+        item.addEventListener('click', this.toggleLI.bind(this))
+      })
+    }
+
+    /**
+    * Toggle UL element
+    */
+    toggleUL(event) {
+      if (this.classList.contains('open')) this.classList.remove('open');
+      else this.classList.add('open');
+    }
+
+    /**
+    * Toggle LI checkbox element
+    */
+    toggleLI(event) {
+      if (event.target.tagName == 'LI') event.target.querySelector('input[type="checkbox"]').click();
+    }
+  }
+
+  customElements.define('filter-option-box', filterOptionBox);
+</script>

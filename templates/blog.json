@@ -1,0 +1,70 @@
+{
+  "sections": {
+    "main": {
+      "type": "blog-template",
+      "settings": {
+        "blog_show_tag_filter": false,
+        "blog_show_rss": false,
+        "blog_show_tags": false,
+        "blog_show_date": true,
+        "blog_show_comments": true,
+        "blog_show_author": false,
+        "blog_show_excerpt": false,
+        "blog_image_size": "wide"
+      }
+    },
+    "featured-collections": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection1": {
+          "type": "collection",
+          "settings": {
+            "collection": "vtt",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "collection2": {
+          "type": "collection",
+          "settings": {
+            "collection": "cartobike",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "collection3": {
+          "type": "collection",
+          "settings": {
+            "collection": "cyclo",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "collection4": {
+          "type": "collection",
+          "settings": {
+            "collection": "livres-aventure",
+            "title": "",
+            "focal_point": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "collection1",
+        "collection2",
+        "collection3",
+        "collection4"
+      ],
+      "settings": {
+        "title": "Partez à l'aventure",
+        "divider": false,
+        "per_row": 4,
+        "enable_gutter": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured-collections"
+  ]
+}

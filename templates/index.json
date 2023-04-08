@@ -1,0 +1,356 @@
+{
+  "sections": {
+    "16545274319ea9ca18": {
+      "type": "hero-video",
+      "settings": {
+        "title": "Les meilleurs trails\nsont sur vtopo.fr",
+        "title_size": 80,
+        "subheading": "#FOLLOWTHEGUIDE",
+        "link_text": "VA ROULER",
+        "link": "shopify:\/\/collections\/a-velo",
+        "color_accent": "rgba(0,0,0,0)",
+        "text_align": "vertical-center horizontal-center",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=XimgBtkO4Rs",
+        "overlay_opacity": 0,
+        "section_height": "650px",
+        "mobile_height": "500px"
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Depuis 2005"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "enlarge_text": true,
+            "text": "<p>Maison d'édition sportive 100% française, VTOPO édite des Topo-guides reconnus depuis 2005 sur le VTT, l'escalade, le vélo de route, la rando à pied et conçoit également des Livres d'aventure.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "align_text": "center",
+        "narrow_column": true,
+        "divider": false
+      }
+    },
+    "promo-grid": {
+      "type": "promo-grid",
+      "blocks": {
+        "384f7a20-f089-48f3-8559-db1b25af95b6": {
+          "type": "banner",
+          "settings": {
+            "heading": "🎁 CARTE-CADEAU",
+            "text": "Pour faire plaisir à ceux qui ne restent pas sur le canapé !",
+            "link": "shopify:\/\/products\/carte-cadeau",
+            "label": "Offrir",
+            "color_tint": "#000000",
+            "color_tint_opacity": 8,
+            "framed": true
+          }
+        },
+        "promo-0": {
+          "type": "advanced",
+          "disabled": true,
+          "settings": {
+            "subheading": "Pré-commande",
+            "heading": "NOUVEAU",
+            "textarea": "Carte 100% eBike VTTAE Traces GPS incluses pour parcourir le Luberon.",
+            "cta_text1": "Commander",
+            "cta_link1": "shopify:\/\/products\/vttae-bouches-du-rhone",
+            "cta_text2": "Toutes les CARTOBIKE",
+            "cta_link2": "",
+            "image": "shopify:\/\/shop_images\/Carte_VTTAE_Luberon_HD_face.jpg",
+            "video_url": "",
+            "width": "33",
+            "height": 800,
+            "text_size": 100,
+            "text_align": "vertical-center horizontal-center",
+            "color_accent": "rgba(0,0,0,0)",
+            "boxed": false,
+            "framed": true
+          }
+        },
+        "promo-1": {
+          "type": "advanced",
+          "disabled": true,
+          "settings": {
+            "subheading": "PRINTEMPS \/ ÉTÉ 2022",
+            "heading": "MONTAGNE",
+            "textarea": "La saison montagne estivale est lancée, découvrez notre sélection de topo-guides Alpes et Pyrénées.",
+            "cta_text1": "VTT",
+            "cta_link1": "shopify:\/\/collections\/all",
+            "cta_text2": "Cyclo",
+            "cta_link2": "",
+            "image": "shopify:\/\/shop_images\/fontainevtt06.jpg",
+            "video_url": "",
+            "width": "50",
+            "height": 500,
+            "text_size": 100,
+            "text_align": "vertical-bottom horizontal-center",
+            "color_accent": "rgba(0,0,0,0)",
+            "boxed": true,
+            "framed": false
+          }
+        },
+        "3ce3e21b-dcfa-4253-9bd6-d280ef182534": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/1d0cdaee-464b-48c7-9615-bd2dc81e8e4c.jpg",
+            "link": "",
+            "width": "50"
+          }
+        },
+        "3705b50b-45c8-4eb9-a59b-f034b1e33ca2": {
+          "type": "sale_collection",
+          "disabled": true,
+          "settings": {
+            "sale_collection": "vtt-itinerance",
+            "top_text": "VTT",
+            "middle_text": "Itinérance",
+            "bottom_text": "Partez à l'aventure",
+            "width": "100",
+            "color_tint": "#000000",
+            "color_tint_opacity": 0,
+            "boxed": false,
+            "framed": false
+          }
+        },
+        "d8d86415-a88d-4e6e-ba17-8170ae66416f": {
+          "type": "sale_collection",
+          "settings": {
+            "sale_collection": "pre-commande",
+            "top_text": "Remise",
+            "middle_text": "30% off",
+            "bottom_text": "Pré-commande",
+            "width": "100",
+            "color_tint": "#000000",
+            "color_tint_opacity": 0,
+            "boxed": false,
+            "framed": false
+          }
+        },
+        "57b18a95-3552-4997-a97c-8276cdc35416": {
+          "type": "product",
+          "disabled": true,
+          "settings": {
+            "product": "carte-gravel-vaucluse",
+            "subheading": "Cartobike",
+            "heading": "GRAVEL",
+            "textarea": "Carte 100% GRAVEL Traces GPS incluses pour parcourir le Vaucluse.",
+            "link_label": "DÉCOUVRIR",
+            "label": "Nouveau",
+            "enable_price": true,
+            "width": "50",
+            "text_size": 100,
+            "color_tint": "#000000",
+            "color_tint_opacity": 0,
+            "framed": false
+          }
+        },
+        "0e72e71b-eac1-4991-970a-6aa85b5d93fb": {
+          "type": "banner",
+          "settings": {
+            "heading": "TRACE Gps",
+            "text": "Format GPX compatibes smartphones et GPS portables",
+            "link": "shopify:\/\/collections\/traces-gps",
+            "label": "Télécharger",
+            "color_tint": "#000000",
+            "color_tint_opacity": 8,
+            "framed": true
+          }
+        }
+      },
+      "block_order": [
+        "384f7a20-f089-48f3-8559-db1b25af95b6",
+        "promo-0",
+        "promo-1",
+        "3ce3e21b-dcfa-4253-9bd6-d280ef182534",
+        "3705b50b-45c8-4eb9-a59b-f034b1e33ca2",
+        "d8d86415-a88d-4e6e-ba17-8170ae66416f",
+        "57b18a95-3552-4997-a97c-8276cdc35416",
+        "0e72e71b-eac1-4991-970a-6aa85b5d93fb"
+      ],
+      "settings": {
+        "full_width": true,
+        "gutter_size": 20,
+        "space_above": false,
+        "space_below": false,
+        "lazyload_images": true
+      }
+    },
+    "featured-collections": {
+      "type": "featured-collections",
+      "blocks": {
+        "featured-collections-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "vtt",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "featured-collections-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "vttae",
+            "title": "eBike VTTAE",
+            "focal_point": "top center"
+          }
+        },
+        "featured-collections-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "vtt-enduro",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "featured-collections-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "gravel",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "fe64052c-ce64-45b8-88da-f8cf479c8762": {
+          "type": "collection",
+          "settings": {
+            "collection": "cyclo",
+            "title": "",
+            "focal_point": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "featured-collections-0",
+        "featured-collections-3",
+        "featured-collections-2",
+        "featured-collections-1",
+        "fe64052c-ce64-45b8-88da-f8cf479c8762"
+      ],
+      "settings": {
+        "title": "Toutes les pratiques à vélo",
+        "divider": false,
+        "per_row": 5,
+        "enable_gutter": true
+      }
+    },
+    "background-image-text": {
+      "type": "background-image-text",
+      "settings": {
+        "subtitle": "",
+        "title": "Leitmotiv",
+        "text": "<p><em>« Les meilleurs riders sont ceux qui roulent sur des terrains variés et changent constamment de spots. C’est la clef. »<\/em><\/p><p>Cédric Tassan, fondateur des Éditions VTOPO<\/p>",
+        "button_label": "",
+        "button_link": "",
+        "image": "shopify:\/\/shop_images\/P1119321.jpg",
+        "layout": "right",
+        "height": 550,
+        "framed": false,
+        "parallax": true,
+        "parallax_direction": "top",
+        "lazyload_images": true
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Carte Traces GPS Incluses",
+        "home_featured_products": "cartobike",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "1654524265b3973500": {
+      "type": "background-video-text",
+      "settings": {
+        "subtitle": "#FOLLOWTHEGUIDE",
+        "title": "Le Sud à vélo : Du VTT dans le Verdon",
+        "text": "<p>Cette nouvelle vidéo YouTube VTOPO va vous donner envie de rouler dans les Alpes de Haute-Provence et plus précisément dans le Verdon. <strong>Likez et abonnez-vous à la chaîne !<\/strong><\/p>",
+        "button_label": "Voir la vidéo",
+        "button_link": "https:\/\/www.youtube.com\/watch?v=SZOGtkdviGA",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=SZOGtkdviGA",
+        "color_border": "#f4f4f4",
+        "layout": "left",
+        "height": 550
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "Blog",
+        "blog": "decouverte",
+        "post_limit": 3,
+        "blog_show_tags": false,
+        "blog_show_date": true,
+        "blog_show_comments": true,
+        "blog_show_author": false,
+        "view_all": true,
+        "blog_image_size": "wide",
+        "divider": false
+      }
+    },
+    "165452811428fd7780": {
+      "type": "rich-text",
+      "blocks": {
+        "1654528114cc6cde8c-0": {
+          "type": "heading",
+          "settings": {
+            "title": "Le nouveau film de Cédric Tassan"
+          }
+        },
+        "1654528114cc6cde8c-1": {
+          "type": "text",
+          "settings": {
+            "enlarge_text": true,
+            "text": "<p>En ce moment en tournée nationale dans les cinémas et festivals.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "1654528114cc6cde8c-0",
+        "1654528114cc6cde8c-1"
+      ],
+      "settings": {
+        "align_text": "center",
+        "narrow_column": true,
+        "divider": false
+      }
+    },
+    "16545273579db4b913": {
+      "type": "featured-video",
+      "settings": {
+        "title": "",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=F2T3Q6Frx6Y",
+        "divider": false
+      }
+    }
+  },
+  "order": [
+    "16545274319ea9ca18",
+    "rich-text",
+    "promo-grid",
+    "featured-collections",
+    "background-image-text",
+    "featured-collection",
+    "1654524265b3973500",
+    "blog-posts",
+    "165452811428fd7780",
+    "16545273579db4b913"
+  ]
+}
