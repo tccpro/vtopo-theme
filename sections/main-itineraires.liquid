@@ -1,269 +1,30 @@
-{%- comment -%}
-  Custom style - Will be moved into theme.css.liquid or custom.css.liquid file in the future.
-{%- endcomment -%}
 {% style %}
   #itineraire-page-{{section.id}} {
     padding-bottom: 120px;
   }
-  .itineraire-title {
-    text-align: center;
-  }
-  .metaobject-box {
-    display: flex;
-    width: 100%;
-    gap: 24px;
-  }
-  .metaobject-tools-box {
-    display: flex;
-    justify-content: end;
-  }
-  .metaobject-table-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .metaobject-tools-box {
-    display: flex;
-    justify-content: space-between;
-  }
-  select.metaobject-sort-select {
-    width: 200px;
-  }
-  ul.filter-filters-list {
-    list-style: none;
-  }
-  ul.filter-filters-list li {
-    transition: .3s;
-  }
-  ul.filter-filters-list li.hide-option {
-    height: 0;
-    opacity: 0;
-  }
-  .metaobject-table tr {
-    transition: .3s;
-  }
-  @media screen and (max-width: 768px) {
-    .metaobject-box {
-      flex-direction: column;
-    }
-    .metaobject-container {
-      overflow: auto;
-      padding: 0 0 15px;
-    }
-  }
-
-  filter-option-box ul.filter-filters-list {
-    margin-left: 0;
-  }
-
-  filter-option-box {
-    border-bottom: 1px solid #2b2a27;
-    border-width: thin;
-    display: block;
-  }
-
-  filter-option-box:last-child {
-    border-bottom: none;
-  }
-
-  filter-option-box label.filter-filter-label {
-    position: relative;
-    padding: 15px 15px 15px 0;
-    margin: 0;
-    cursor: pointer;
-  }
-  
-  filter-option-box label.filter-filter-label::after {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    top: 50%;
-    right: 3px;
-    transform: translateY(-50%) rotate(45deg);
-    border: 2px solid #fff;
-    border-width: 0 2px 2px 0;
-    content: "";
-    transition: .15s;
-  }
-
-  filter-option-box.open label.filter-filter-label::after {
-    transform: translateY(-50%) rotate(-135deg);
-  }
-  
-  filter-option-box .filter-filters-list {
-    transition: .3s;
-    height: 0;
-    overflow: hidden;
-  }
-
-  filter-option-box.open .filter-filters-list {
-    height: auto;
-  }
-
-  filter-option-box li.filter-option {
-    cursor: pointer;
-    position: relative;
-  }
-
-  li.filter-option::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    content: "";
-  }
-
-  filter-option-box li.filter-option input[type="checkbox"] {
-    display: none;
-  }
-
-  filter-option-box li.filter-option span.filter-checkbox {
-    position: relative;
-    padding-left: 25px;
-  }
-
-  filter-option-box li.filter-option span.filter-checkbox::before {
-    border: 1px solid;
-    border-color: #2b2a27;
-    height: 16px;
-    width: 16px;
-  }
-
-  filter-option-box li.filter-option.checked span.filter-checkbox::after {
-    height: 10px;
-    width: 10px;
-    left: 3px;
-  }
-
-  filter-option-box li.filter-option span.filter-checkbox::after, 
-  filter-option-box li.filter-option span.filter-checkbox::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  filter-option-box li.filter-option.checked span.filter-checkbox::after {
-    background-color: #fff;
-  }
-
-  /**
-  * Rnage element style
-  */
-  .range-option-label-box {
-    display: flex;
-    justify-content: space-between;
-  }
-  input.range-input-max.input-range::before {
-    content: "";
-    width: 100%;
-    height: 0;
-    border-top: solid 1px #2b2a27;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    z-index: -1;
-  }
-  .filter-option .range-between-fill {
-    width: calc(100% - 18px);
-    height: 0;
-    border-top: solid 1px #fff;
-    position: absolute;
-    top: 50%;
-    left: 9px;
-    transform: translateY(-3px);
-    z-index: 2;
-  }
-  li.filter-option input.input-range {
-    width: 100%;
-    z-index: 3;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none;
-    padding-left: 0;
-    padding-right: 0;
-    margin: 0;
-  }
-  input.input-range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    background: #fff;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-  }
-  input.input-range::-moz-range-thumb {
-    background: #fff;
-  }
-  input.range-input-min.input-range::-webkit-slider-thumb {
-    z-index: 9;
-    position: relative;
-  }
-  input.range-input-min.input-range::-moz-range-thumb {
-    z-index: 9;
-    position: relative;
-  }
-  input.range-input-max.input-range {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  metaobject-table td[data-title] {
-    position: relative;
-  }
-  metaobject-table td[data-title]:hover::after {
-    content: attr(data-title);
-    z-index: 2;
-    position: absolute;
-    top: calc(100% - 5px);
-    left: 18px;
-    border-radius: 5px;
-    border: 1px solid #2b2a27;
-    border-width: thin;
-    background-color: #fff;
-    color: #000;
-    padding:2px 8px;
-    font-size: 12px;
-  }
-  a.niveau {
-    padding-left: 12px;
-    position: relative;
-    white-space: nowrap;
-  }
-  a.niveau::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%;
-    background: white;
-    z-index: 2;
-  }
-  a.niveau.niveau-famille::before {
-    background-color: #64a70d;
-  }
-  a.niveau.niveau-expert::before {
-    background-color: #ea862c;
-  }
-  a.niveau.niveau-init::before {
-    background-color: #2aa4da;
-  }
 {% endstyle %}
 
-{{ 'main-itineraires.css' | asset_url }}
+{{ 'main-itineraires.css' | asset_url | stylesheet_tag }}
 
 <div class="page-width" id="itineraire-page-{{section.id}}">
   <h1 class="itineraire-title">Itineraire</h1>
   <metaobject-table>
     <div class="metaobject-box">
-      <div class="metaobject-filter">
+      <div class="metaobject-filter grid__item--sidebar">
+        <div class="drawer__fixed-header">
+          <div class="drawer__header">
+            <div class="h2 drawer__title">
+              Filter
+            </div>
+            <div class="drawer__close">
+              <button type="button" class="drawer__close-button js-drawer-close">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"></path></svg>
+                <span class="icon__fallback-text">Close menu</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="no-bullets tag-list tag-list--active-tags"></ul>
       </div>
       <div class="metaobject-table-container">
         <div class="metaobject-tools-box">
@@ -277,8 +38,8 @@
               <option value="DISTANCE_DES">Distance <</option>
               <option value="DUREE_ASC">Durée ></option>
               <option value="DUREE_DES">Durée <</option>
-              <option value="DIFFICLUTE_ASC">Difficulté ></option>
-              <option value="DIFFICLUTE_DES">Difficulté <</option>
+              <option value="DIFFICULTE_ASC">Difficulté ></option>
+              <option value="DIFFICULTE_DES">Difficulté <</option>
               <option value="DEPARTEMENT_ASC">Département A-Z</option>
               <option value="DEPARTEMENT_DES">Département Z-A</option>
               <option value="TITRE_ASC">Titre A-Z</option>
@@ -286,8 +47,16 @@
             </select>
           </div>
         </div>
+        <div class="collection-filter">
+          <div class="collection-filter__item collection-filter__item--drawer">
+            <button type="button" class="js-drawer-open-collection-filters btn btn--tertiary" aria-controls="FilterDrawer" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-filter" viewBox="0 0 64 64"><path d="M48 42h10M48 42a5 5 0 1 1-5-5 5 5 0 0 1 5 5zM7 42h31M16 22H6M16 22a5 5 0 1 1 5 5 5 5 0 0 1-5-5zM57 22H26"></path></svg>
+                Filter
+            </button>
+          </div>
+        </div>
+        <div class="total-count-box"><span class="total-count">0</span>&nbsp;<span>itineraires</span></div>
         <div class="metaobject-container">
-          <div class="total-count-box"><span class="total-count">0</span>&nbsp;<span>itineraires</span></div>
           <table class="itineraire-table metaobject-table">
             <thead>
               <!-- discipline, pays, region, departemen -->
@@ -304,11 +73,12 @@
             <tbody>        
             </tbody>    
           </table>
-          <div class="pagination-buttons">
-          </div>
+        </div>
+        <div class="pagination-buttons">
         </div>
       </div>
     </div>
+    <span class="draw-back-layout"></span>
   </metaobject-table>
 </div>
 
@@ -320,5 +90,4 @@
 {% endschema %}
 
 <script src="{{ 'metaobjects.js' | asset_url }}"></script>
-
 <script src="{{ 'main-itineraires.js' | asset_url }}"></script>

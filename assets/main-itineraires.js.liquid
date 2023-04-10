@@ -10,59 +10,110 @@ class MetaobjectTable extends HTMLElement {
         /**
         * Dom elements
         */
-        this.table = this.querySelector('.metaobject-table');
-        this.tbody = this.table.querySelector('TBODY');
-        this.filterBox = this.querySelector('.metaobject-filter');
-        this.searchInput = this.querySelector('.metaobject-search-input');
-        this.sortSelect = this.querySelector('.metaobject-sort-select');
-        this.paginationButtonBox = this.querySelector('.pagination-buttons');
-        this.totalCount = this.querySelector('.total-count-box span.total-count');
+        this.table                  = this.querySelector('.metaobject-table');
+        this.tbody                  = this.table.querySelector('TBODY');
+        this.filterBox              = this.querySelector('.metaobject-filter');
+        this.sortSelect             = this.querySelector('.metaobject-sort-select');
+        this.totalCount             = this.querySelector('.total-count-box span.total-count');
+        this.searchInput            = this.querySelector('.metaobject-search-input');
+        this.drawBackLayout         = this.querySelector('.draw-back-layout');
+        this.drawOpenButton         = this.querySelector('.collection-filter');
+        this.drawCloseButton        = this.querySelector('.drawer__close button.drawer__close-button');
+        this.activatedTagsBox       = this.querySelector('.tag-list--active-tags');
+        this.paginationButtonBox    = this.querySelector('.pagination-buttons');
 
         /**
         * CONSTANTS
         */
-        this.TYPE_SORT              = "SORT";
-        this.TYPE_RANGE             = "RANGE";
-        this.TYPE_CHECKBOX          = "CHECKBOX";
-        this.TYPE_TIME_RANGE        = "TIME_RANGE";
-        this.TYPE_NUMBER_RANGE      = "NUMBER_RANGE";
+        this.TYPE_SORT                  = "SORT";
+        this.TYPE_RANGE                 = "RANGE";
+        this.TYPE_CHECKBOX              = "CHECKBOX";
+        this.TYPE_TIME_RANGE            = "TIME_RANGE";
+        this.TYPE_RANGE_CHECKBOX        = "RANGE_CHECKBOX";
         
-        this.ACTION_ADD             = "ACTION_ADD";
-        this.ACTION_REMOVE          = "ACTION_REMOVE";
+        this.ACTION_ADD                 = "ACTION_ADD";
+        this.ACTION_REMOVE              = "ACTION_REMOVE";
         
-        this.CONDITION_NUMBER_RANGE = "CONDITION_NUMBER_RANGE";
-        this.CONDITION_SORT         = "CONDITION_SORT";
-        this.CONDITION_RANGE        = "CONDITION_RANGE";
-        this.CONDITION_CHECKBOX     = "CONDITION_CHECKBOX";
-        this.CONDITION_SEARCH       = "CONDITION_SEARCH";
+        this.CONDITION_SORT             = "CONDITION_SORT";
+        this.CONDITION_RANGE            = "CONDITION_RANGE";
+        this.CONDITION_SEARCH           = "CONDITION_SEARCH";
+        this.CONDITION_CHECKBOX         = "CONDITION_CHECKBOX";
+        this.CONDITION_RANGE_CHECKBOX   = "CONDITION_RANGE_CHECKBOX";
         
-        this.SORT_DISTANCE_ASC      = "DISTANCE_ASC"
-        this.SORT_DISTANCE_DES      = "DISTANCE_DES"
-        this.SORT_DUREE_ASC         = "DUREE_ASC"
-        this.SORT_DUREE_DES         = "DUREE_DES"
-        this.SORT_DIFFICLUTE_ASC    = "DIFFICLUTE_ASC"
-        this.SORT_DIFFICLUTE_DES    = "DIFFICLUTE_DES"
-        this.SORT_DEPARTEMENT_ASC   = "DEPARTEMENT_ASC"
-        this.SORT_DEPARTEMENT_DES   = "DEPARTEMENT_DES"
-        this.SORT_TITRE_ASC         = "TITRE_ASC"
-        this.SORT_TITRE_DES         = "TITRE_DES"
+        this.SORT_TITRE_ASC             = "TITRE_ASC";
+        this.SORT_TITRE_DES             = "TITRE_DES";
+        this.SORT_DUREE_ASC             = "DUREE_ASC";
+        this.SORT_DUREE_DES             = "DUREE_DES";
+        this.SORT_DISTANCE_ASC          = "DISTANCE_ASC";
+        this.SORT_DISTANCE_DES          = "DISTANCE_DES";
+        this.SORT_DIFFICULTE_ASC        = "DIFFICULTE_ASC";
+        this.SORT_DIFFICULTE_DES        = "DIFFICULTE_DES";
+        this.SORT_DEPARTEMENT_ASC       = "DEPARTEMENT_ASC";
+        this.SORT_DEPARTEMENT_DES       = "DEPARTEMENT_DES";
         
-        this.REG_EX                 = /(<([^>]+)>)/gmi;
-        this.SEPERATOR              = '_#_';
-        this.SORT_INDEX             = 0;
+        this.SORT_INDEX                 = 0;
+        this.SEPERATOR                  = '_#_';
+        this.REG_EX                     = /(<([^>]+)>)/gmi;
+        this.REG_EX_LABEL               = /(<([^>]+)>.*<\/([^>]+))>/gmi;
 
         /**
         * Main data
         */
-        this.DATA = window.metaobjectsForAppPage;
-        this.CONDITIONS = new Map();
-        this.TEMP_OPTIONS = new Set();
-        this.SELECT_OPTIONS = new Set();
+       this.CONDITIONS = new Map();
+       this.TEMP_OPTIONS = new Set();
+       this.SELECT_OPTIONS = new Set();
+       this.DATA = window.metaobjectsForAppPage;
+       this.TEMP_DATA = this.DATA; //pagination;
 
         /**
         * Array of header Index for filter bar
         */
         this.FILTERS = [10, 11, 1, 7, 3, 4, 6, 8];
+
+        /**
+         * Array of sort Index
+         */
+        this.SORTS = {
+            "TITRE_ASC": 0,
+            "TITRE_DES": 0,
+            "DUREE_ASC": 6,
+            "DUREE_DES": 6,
+            "DISTANCE_ASC": 3,
+            "DISTANCE_DES": 3,
+            "DIFFICULTE_ASC": 2,
+            "DIFFICULTE_DES": 2,
+            "DEPARTEMENT_ASC": 1,
+            "DEPARTEMENT_DES": 1
+        }
+
+        /**
+         * Diff array for sorting
+         */
+        this.DIFFICULTE_NUMBER_ARRAY = {
+            "V1-":  0,
+            "V1":   1,
+            "V1+":  2,
+
+            "V2-":  3,
+            "V2":   4,
+            "V2+":  5,
+
+            "V3-":  6,
+            "V3":   7,
+            "V3+":  8,
+
+            "V4-":  9,
+            "V4":   10,
+            "V4+":  11,
+
+            "V5-":  12,
+            "V5":   13,
+            "V5+":  14,
+
+            "V6-":  15,
+            "V6":   16,
+            "V6+":  17
+        }
 
         /**
         * Header Data
@@ -90,7 +141,7 @@ class MetaobjectTable extends HTMLElement {
             },
             {
                 index: 3,
-                type: this.TYPE_RANGE,
+                type: this.TYPE_RANGE_CHECKBOX,
                 visible: true,
                 label: "Distance",
                 unit: "km",
@@ -99,6 +150,7 @@ class MetaobjectTable extends HTMLElement {
                 blocks: [
                     {
                         label: "Jusqu’à 10 km",
+                        min: 0,
                         max: 10
                     },
                     {
@@ -118,13 +170,14 @@ class MetaobjectTable extends HTMLElement {
                     },
                     {
                         label: "À partir de 40 km",
-                        min: 40
+                        min: 40,
+                        max: Infinity
                     }
                 ]
             },
             {
                 index: 4,
-                type: this.TYPE_RANGE,
+                type: this.TYPE_RANGE_CHECKBOX,
                 visible: true,
                 label: "Dénivelée +",
                 unit: "m",
@@ -133,6 +186,7 @@ class MetaobjectTable extends HTMLElement {
                 blocks: [
                     {
                         label: "Jusqu’à 300m",
+                        min: 0,
                         max: 300
                     },
                     {
@@ -152,7 +206,8 @@ class MetaobjectTable extends HTMLElement {
                     },
                     {
                         label: "À partir de 1200m",
-                        min: 1200
+                        min: 1200,
+                        max: Infinity
                     }
                 ]
             },
@@ -164,7 +219,7 @@ class MetaobjectTable extends HTMLElement {
             },
             {
                 index: 6,
-                type: this.TYPE_RANGE,
+                type: this.TYPE_RANGE_CHECKBOX,
                 visible: true,
                 label: "Durée",
                 time_formatting: true,
@@ -174,6 +229,7 @@ class MetaobjectTable extends HTMLElement {
                 blocks: [
                     {
                         label: "Jusqu’à 1h",
+                        min: 0,
                         max: 60
                     }, 
                     {
@@ -193,7 +249,8 @@ class MetaobjectTable extends HTMLElement {
                     },
                     {
                         label: "À partir de 4h",
-                        min: 240
+                        min: 240,
+                        max: Infinity
                     }
                 ]
             },
@@ -231,16 +288,27 @@ class MetaobjectTable extends HTMLElement {
         ];
 
         /**
-        * @Update Rows per paginantion - will be dynamic value with a select box
+        * @Update Rows per pagination - will be dynamic value with a select box
         */
         this.ROWS_PER_PAGINATION = 30;
         this.CURRENT_PAGE_INDEX = 0;
+        this.PAGE_TOTAL = 0;
+        this.PREV_BUTTON_ICON = `<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-left" viewBox="0 0 284.49 498.98"><path d="M249.49 0a35 35 0 0 1 24.75 59.75L84.49 249.49l189.75 189.74a35.002 35.002 0 1 1-49.5 49.5L10.25 274.24a35 35 0 0 1 0-49.5L224.74 10.25A34.89 34.89 0 0 1 249.49 0z"></path></svg>`;
+        this.NEXT_BUTTON_ICON = `<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-right" viewBox="0 0 284.49 498.98"><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98z"></path></svg>`;
+        this.DOTS_CONTENT = '…';
 
         /**
         * Search and sort event handler bind
         */
         this.searchInput.addEventListener('input', this.search.bind(this));
         this.sortSelect.addEventListener('change', this.sort.bind(this));
+
+        /**
+         * Event handler for draw opener
+         */
+        this.drawOpenButton.addEventListener('click', this.openDraw.bind(this));
+        this.drawBackLayout.addEventListener('click', this.closeDraw.bind(this));
+        this.drawCloseButton.addEventListener('click', this.closeDraw.bind(this));
 
         this.init();
     }
@@ -255,6 +323,7 @@ class MetaobjectTable extends HTMLElement {
         * Init conditions
         */
         this.CONDITIONS.set(this.CONDITION_CHECKBOX, new Map());
+        this.CONDITIONS.set(this.CONDITION_RANGE_CHECKBOX, new Map());
         this.CONDITIONS.set(this.CONDITION_RANGE, new Map());
         this.CONDITIONS.set(this.CONDITION_SEARCH, null);
         this.CONDITIONS.set(this.CONDITION_SORT, null);
@@ -263,6 +332,77 @@ class MetaobjectTable extends HTMLElement {
         * Init table
         */
         this.drawTable(this.DATA);
+    }
+
+    /**
+     * Number range event handler
+     */
+    numberRange(event) {
+        /**
+        * Get data-index
+        */
+        let dataIndexString = event.target.getAttribute('data-index');
+        const dataIndex = dataIndexString.split(`${this.SEPERATOR}`);
+
+        /**
+        * Get current min value and max value
+        */
+        const RANGE_MIN_VALUE = Number(event.target.getAttribute('data-min'));
+        const RANGE_MAX_VALUE = Number(event.target.getAttribute('data-max'));
+
+        /**
+         * Get current block index
+         */
+        const BLOCK_INDEX = Number(event.target.getAttribute('data-block'));
+
+        /**
+        * Action define and checked class add or remove
+        */
+        let action = this.ACTION_ADD;
+        const parentLIelement = event.target.parentElement;
+        const parentULelement = parentLIelement.parentElement;
+        if (event.target.checked) {
+            /**
+            * Add `checked` class to the parent UL element and LI element
+            */
+            parentULelement.classList.add('checked');
+            parentLIelement.classList.add('checked');
+        } else {
+            /**
+            * Remove `checked` class from the parent UL element,
+            * if there is no checked INPUT element
+            */
+            if (parentULelement.querySelectorAll('input:checked').length == 0) {
+                parentULelement.classList.remove('checked');
+            }
+
+            /**
+            * Remove `checked` class from the parent LI element
+            */
+            parentLIelement.classList.remove('checked');
+
+            /**
+            * Reassign `remove` to `action`
+            */
+            action = this.ACTION_REMOVE;
+        }
+
+        /**
+        * Validate data-index
+        */
+        if (!dataIndex || dataIndex?.length != 2) return;
+
+        /**
+        * Update condition in this.condistions
+        */
+        this.setCondition({
+            type: this.CONDITION_RANGE_CHECKBOX,
+            index: dataIndex[0],
+            action: action,
+            block: BLOCK_INDEX,
+            min: RANGE_MIN_VALUE,
+            max: RANGE_MAX_VALUE
+        });
     }
 
     /**
@@ -381,6 +521,24 @@ class MetaobjectTable extends HTMLElement {
         switch (obj.type) {
 
             /**
+            * Number Range min and max value
+            */
+            case this.CONDITION_RANGE_CHECKBOX:
+                let condition_range_checkbox = this.CONDITIONS.get(this.CONDITION_RANGE_CHECKBOX).get(obj.index);
+
+                condition_range_checkbox = condition_range_checkbox ? condition_range_checkbox : new Map();
+
+                if (obj.action == this.ACTION_ADD) condition_range_checkbox.set(obj.block, {
+                    min: obj.min,
+                    max: obj.max
+                });
+                else condition_range_checkbox.delete(obj.block);
+
+                if (condition_range_checkbox.size === 0) this.CONDITIONS.get(this.CONDITION_RANGE_CHECKBOX).delete(obj.index);
+                else this.CONDITIONS.get(this.CONDITION_RANGE_CHECKBOX).set(obj.index, condition_range_checkbox);
+                break;
+
+            /**
             * Range min and max value
             */
             case this.CONDITION_RANGE:
@@ -388,7 +546,6 @@ class MetaobjectTable extends HTMLElement {
                     min: obj.min,
                     max: obj.max
                 });
-
                 break;
 
             /**
@@ -419,6 +576,7 @@ class MetaobjectTable extends HTMLElement {
             case this.CONDITION_SORT:
                 this.CONDITIONS.set(this.CONDITION_SORT, obj.value);
                 break;
+
             default:
                 break;
         }
@@ -427,6 +585,7 @@ class MetaobjectTable extends HTMLElement {
 
     /**
     * filterByCondition
+    * @UPDATE_FOR_RANGE_CHECKBOX
     */
     filterByConditions(obj) {
 
@@ -455,16 +614,36 @@ class MetaobjectTable extends HTMLElement {
             );
 
         /**
+         * For filterable entires counting 
+         */
+        const filterCountData = new Map();
+        this.FILTERS.map(headerIndex => filterCountData.set(headerIndex, data));
+        
+        /**
         * Apply filter options
         */
         this.CONDITIONS.get(this.CONDITION_CHECKBOX).forEach((value, key) => {
             /**
              * If the type of column is array, use findIndex property of Array object
              */
-            if (this.HEADER[key].isArray)
+            if (this.HEADER[key].isArray) {
                 data = data.filter(item => item[parseInt(key)].value.findIndex(subItem => value.has(subItem)) > -1);
-            else
+                filterCountData.forEach((filterDataValue, filterDataKey) => {
+                    if (filterDataKey != key) {
+                        const updatedFilterData = filterDataValue.filter(item => item[parseInt(key)].value.findIndex(subItem => value.has(subItem)) > -1);
+                        filterCountData.set(filterDataKey, updatedFilterData);
+                    }
+                })
+            }
+            else {
                 data = data.filter(item => value.has(item[parseInt(key)].value));
+                filterCountData.forEach((filterDataValue, filterDataKey) => {
+                    if (filterDataKey != key) {
+                        const updatedFilterData = filterDataValue.filter(item => value.has(item[parseInt(key)].value));
+                        filterCountData.set(filterDataKey, updatedFilterData);
+                    }
+                })
+            }
         });
 
         /**
@@ -472,22 +651,169 @@ class MetaobjectTable extends HTMLElement {
         */
         this.CONDITIONS.get(this.CONDITION_RANGE).forEach((value, key) => {
             data = data.filter(item => {
-                return value.min <= Number(item[parseInt(key)].value) && Number(item[parseInt(key)].value) <= value.max
+                const itemValue = Number(item[parseInt(key)].value)
+                return value.min <= itemValue && itemValue <= value.max
             });
+            filterCountData.forEach((filterDataValue, filterDataKey) => {
+                if (filterDataKey != key) {
+                    const updatedFilterData = filterDataValue.filter(item => {
+                        const itemValue = Number(item[parseInt(key)].value)
+                        return value.min <= itemValue && itemValue <= value.max
+                    });
+                    filterCountData.set(filterDataKey, updatedFilterData);
+                }
+            })
         });
+
+        /**
+        * Apply Range Checkbox options
+        */
+        this.CONDITIONS.get(this.CONDITION_RANGE_CHECKBOX).forEach((value, key) => {
+            
+            /**
+             * Init TempData
+             */
+            const TempData = [];
+            
+            /**
+             * Filter and push to TempData
+             */
+            value.forEach((range, blockIndex) => {
+                data.map(item => {
+                    const itemValue = Number(item[parseInt(key)].value)
+                    if (range.min < itemValue && itemValue <= range.max) TempData.push(item);
+                });
+            });
+            
+            /**
+             * Assign TempData to data
+             */
+            data = TempData;
+
+            /**
+             * Delete TempData
+             */
+            TempData.slice(TempData.length);
+            
+            filterCountData.forEach((filterDataValue, filterDataKey) => {
+                if (filterDataKey != key) {
+
+                    /**
+                     * Init filterTempData
+                     */
+                    const filterTempData = [];
+                    
+                    /**
+                     * Filter and push to filterTempData
+                     */
+                    value.forEach((range, blockIndex) => {
+                        filterDataValue.map(item => {
+                            const itemValue = Number(item[parseInt(key)].value)
+                            if (range.min < itemValue && itemValue <= range.max) filterTempData.push(item);
+                        });
+                    });
+                    
+                    /**
+                     * Assign TempData to data
+                     */
+                    data = filterTempData;
+
+                    /**
+                     * Delete TempData
+                     */
+                    filterTempData.slice(filterTempData.length);
+
+                    filterCountData.set(filterDataKey, filterTempData);
+                }
+            })
+        })
 
         /**
         * Apply sort
         */
         if (this.CONDITIONS.get(this.CONDITION_SORT)) {
-            data.sort((a, b) => a[this.SORT_INDEX].value.localeCompare(b[this.SORT_INDEX].value));
-            if (this.CONDITIONS.get(this.CONDITION_SORT) === 'z-a') data.reverse();
+
+            switch (this.CONDITIONS.get(this.CONDITION_SORT)) {
+                /**
+                 * TITRE
+                 */
+                case this.SORT_TITRE_ASC:
+                    data.sort((a, b) => a[this.SORTS[this.SORT_TITRE_ASC]].value
+                        .localeCompare(b[this.SORTS[this.SORT_TITRE_ASC]].value));
+                    break;
+                case this.SORT_TITRE_DES:
+                    data.sort((a, b) => a[this.SORTS[this.SORT_TITRE_DES]].value
+                        .localeCompare(b[this.SORTS[this.SORT_TITRE_DES]].value));
+                    data.reverse();
+                    break;
+
+                /**
+                 * DEPARTEMENT
+                 */
+                case this.SORT_DEPARTEMENT_ASC:
+                    data.sort((a, b) => a[this.SORTS[this.SORT_DEPARTEMENT_ASC]].value
+                        .localeCompare(b[this.SORTS[this.SORT_DEPARTEMENT_ASC]].value));
+                    break;
+                case this.SORT_DEPARTEMENT_DES:
+                    data.sort((a, b) => a[this.SORTS[this.SORT_DEPARTEMENT_DES]].value
+                        .localeCompare(b[this.SORTS[this.SORT_DEPARTEMENT_DES]].value));
+                    data.reverse();
+                    break;    
+
+                /**
+                 * DIFFICULTE
+                 */
+                case this.SORT_DIFFICULTE_ASC:
+                    data.sort((a, b) => 
+                                this.DIFFICULTE_NUMBER_ARRAY[a[this.SORTS[this.SORT_DIFFICULTE_ASC]].value.toUpperCase()] 
+                                - this.DIFFICULTE_NUMBER_ARRAY[b[this.SORTS[this.SORT_DIFFICULTE_ASC]].value.toUpperCase()]
+                            );
+                    break;
+                case this.SORT_DIFFICULTE_DES:
+                    data.sort((a, b) => 
+                                this.DIFFICULTE_NUMBER_ARRAY[b[this.SORTS[this.SORT_DIFFICULTE_DES]].value.toUpperCase()] 
+                                - this.DIFFICULTE_NUMBER_ARRAY[a[this.SORTS[this.SORT_DIFFICULTE_DES]].value.toUpperCase()]
+                            );
+                    break;
+                   
+                /**
+                 * DISTANCE
+                 */
+                case this.SORT_DISTANCE_ASC:
+                    data.sort((a, b) => 
+                                a[this.SORTS[this.SORT_DISTANCE_ASC]].value 
+                                - b[this.SORTS[this.SORT_DISTANCE_ASC]].value
+                            );
+                    break;
+                case this.SORT_DISTANCE_DES:
+                    data.sort((a, b) => 
+                                b[this.SORTS[this.SORT_DISTANCE_DES]].value 
+                                - a[this.SORTS[this.SORT_DISTANCE_DES]].value
+                            );
+                    break;
+
+                /**
+                 * DUREE
+                 */
+                case this.SORT_DUREE_ASC:
+                    data.sort((a, b) => 
+                                a[this.SORTS[this.SORT_DUREE_ASC]].value 
+                                - b[this.SORTS[this.SORT_DUREE_ASC]].value
+                            );
+                    break;
+                case this.SORT_DUREE_DES:
+                    data.sort((a, b) => 
+                                b[this.SORTS[this.SORT_DUREE_DES]].value 
+                                - a[this.SORTS[this.SORT_DUREE_DES]].value
+                            );
+                    break;
+
+                default:
+                    break;
+            }
         }
 
-        /**
-        * @Debug 
-        */
-        this.drawFilterBar(data, obj);
+        this.drawFilterBar(filterCountData, obj);
         this.drawTable(data);
     }
 
@@ -499,19 +825,24 @@ class MetaobjectTable extends HTMLElement {
         * To optimize run-time re-arrang `data`
         */
         const dataMapped = [];
-        data.map(item => {
+        if (UPDATED_FILTER_OBJECT) data.forEach((value, key) => {
+            value.map(item => {
+                item.map((field, ind) => {
+                    if (key == ind) {
+                        if (!dataMapped[ind]) dataMapped[ind] = [];
+                        if (field.value != "") dataMapped[ind].push(field.value);
+                    }
+                })
+            });
+        });
+        else data.map(item => {
             item.map((field, ind) => {
                 if (!dataMapped[ind]) dataMapped[ind] = [];
                 if (field.value != "") dataMapped[ind].push(field.value);
             })
         });
 
-        /**
-        * @Debug
-        */
-        if (UPDATED_FILTER_OBJECT) {
-            this.TEMP_OPTIONS = new Set();
-        }
+        if (UPDATED_FILTER_OBJECT) this.TEMP_OPTIONS = new Set();
 
         this.FILTERS.forEach(headerIndex => {
 
@@ -540,6 +871,34 @@ class MetaobjectTable extends HTMLElement {
             * TYPE CASE
             */
             switch (item.type) {
+
+                case this.TYPE_RANGE_CHECKBOX:
+                    /**
+                    * Mapping matched values & count number
+                    */
+                    DATA_ENTRIES?.forEach(key => {
+                        /**
+                         * Cast to Number
+                         */
+                        key = Number(key) ? Number(key) : 0;
+
+                        /**
+                         * Get blockIndex for valid range area
+                         */
+                        const blockIndex = Math.min(parseInt(key / item.blockSize) - (key % item.blockSize == 0 ? 1 : 0), item.blocks.length - 1);
+
+                        /**
+                         * To avoid containing blank values
+                         */
+                        if (blockIndex >= 0)
+                            SELECT_OPTIONS_COUNT.set(blockIndex, 
+                                SELECT_OPTIONS_COUNT.has(blockIndex) 
+                                ? SELECT_OPTIONS_COUNT.get(blockIndex) + 1 
+                                : 1
+                            )
+                    });
+                    break;
+
                 case this.TYPE_RANGE:
                     /**
                     * Minimium and maximium values for range bar
@@ -549,6 +908,7 @@ class MetaobjectTable extends HTMLElement {
                     RANGE_CONFIGURATION.set('step', item.step);
                     RANGE_CONFIGURATION.set('unit', item.unit);
                     break;
+
                 case this.TYPE_CHECKBOX:
                     /**
                     * Mapping matched values & count number
@@ -573,22 +933,43 @@ class MetaobjectTable extends HTMLElement {
                 type: item.type,
                 index: item.index,
                 time_formatting: item.time_formatting,
+                blockSize: item.blockSize,
+                blocks: item.blocks,
                 options: SELECT_OPTIONS_COUNT,
                 rangeConfig: RANGE_CONFIGURATION,
-                created: (UPDATED_FILTER_OBJECT ? true : false)
+                created: (UPDATED_FILTER_OBJECT ? true : false),
+                filterIndex: UPDATED_FILTER_OBJECT?.index
             });
         });
 
+        /**
+         * Hide unavailable filters
+         */
         if (UPDATED_FILTER_OBJECT) {
-            document.querySelectorAll(`LI.hide-option`).forEach(item => {
-                item.classList.remove('hide-option');
-            })
+
+            /**
+             * Add `hide-option` class
+             */
             this.SELECT_OPTIONS.forEach(value => {
-                if (!this.TEMP_OPTIONS.has(value)) {
-                    document.querySelector(`UL:not(.checked) LI[data-index="${value}"]`)?.classList.add('hide-option');
-                }
+                if (!this.TEMP_OPTIONS.has(value)) 
+                    document.querySelector(`LI${UPDATED_FILTER_OBJECT.index ? `:not([data-index^="${UPDATED_FILTER_OBJECT.index}${this.SEPERATOR}"])` : ``}[data-index="${value}"]`)?.classList.add('hide-option');
             })
         }
+
+        this.activatedTagsBox.innerHTML = "";
+
+        document.querySelectorAll('UL.checked li.filter-option.checked').forEach(item => {
+            const tagLabel = item.querySelector('.checkbox-label').innerHTML.replace(this.REG_EX_LABEL, "");
+            const filterTag = document.createElement('LI');
+            filterTag.classList.add('tag');
+            filterTag.classList.add('tag--remove');
+            filterTag.innerHTML = `<a class="btn btn--small">${tagLabel}</a><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"></path></svg>`;
+            this.activatedTagsBox.appendChild(filterTag);
+
+            filterTag.addEventListener('click', (event) => {
+                item.click();
+            })
+        })
     }
 
     /**
@@ -628,6 +1009,60 @@ class MetaobjectTable extends HTMLElement {
             * Case type
             */
             switch (filter.type) {
+                case this.TYPE_RANGE_CHECKBOX:
+                    /**
+                    * Create LI elements and insert children elements ([key, value]) => {}
+                    */
+                    for (const filterOption of filter.options.entries()) {
+                        /**
+                        * Create LI element and add `data-index` attribute 
+                        */
+                        const filterListOne = document.createElement('LI');
+                        filterListOne.classList.add('filter-option');
+                        filterListOne.setAttribute('data-index', `${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+                        filterList.appendChild(filterListOne);
+
+                        /**
+                        * Add to manage filter option visibility
+                        */
+                        this.SELECT_OPTIONS.add(`${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+
+                        /**
+                        * Insert checkbox icon - will be updated
+                        */
+                        const checkboxIcon = document.createElement('SPAN');
+                        checkboxIcon.classList.add('filter-checkbox');
+                        filterListOne.appendChild(checkboxIcon);
+
+                        /**
+                        * Insert checkbox INPUT with name, value, type, `data-index` attributes
+                        */
+                        const checkBoxInput = document.createElement('INPUT');
+                        checkBoxInput.type = 'checkbox';
+                        checkBoxInput.name = filter.label;
+                        checkBoxInput.value = filterOption[0];
+                        checkBoxInput.classList.add('input-select');
+                        checkBoxInput.setAttribute('data-index', `${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+                        checkBoxInput.setAttribute('data-min', filter.blocks[filterOption[0]].min);
+                        checkBoxInput.setAttribute('data-max', filter.blocks[filterOption[0]].max);
+                        checkBoxInput.setAttribute('data-block', filterOption[0]);
+                        filterListOne.appendChild(checkBoxInput);
+
+                        /**
+                        * Define click eventListener 
+                        */
+                        checkBoxInput.addEventListener('click', this.numberRange.bind(this));
+
+                        /**
+                        * Insert checkbox LABEL
+                        */
+                        const checkboxLabel = document.createElement('SPAN');
+                        checkboxLabel.classList.add('checkbox-label');
+                        checkboxLabel.innerHTML = filter.blocks[filterOption[0]].label + ` <span class="item-count">(${filterOption[1]})</span>`;
+                        filterListOne.appendChild(checkboxLabel);
+                    }
+                    break;
+
                 case this.TYPE_RANGE:
                     /**
                     * Min, Max, Step, and Unit
@@ -802,6 +1237,28 @@ class MetaobjectTable extends HTMLElement {
             document.querySelectorAll('.available-option').forEach(item => item.classList.remove('available-option'));
 
             switch (filter.type) {
+                case this.TYPE_RANGE_CHECKBOX:
+                    /**
+                    * Update count of matched entries @func ([key, value]) => {}
+                    */
+                    for (const filterOption of filter.options.entries()) {
+                        /**
+                        * Update count label element and add `data-index` attribute
+                        */
+                        const countOfOptionMatchedEntries = document.querySelector(`li[data-index="${filter.index}${this.SEPERATOR}${filterOption[0]}"] span.item-count`);
+                        countOfOptionMatchedEntries.innerHTML = `(${filterOption[1]})`;
+
+                        /**
+                         * Remove `hide-option` class
+                         */
+                        document.querySelector(`li[data-index="${filter.index}${this.SEPERATOR}${filterOption[0]}"]`).classList.remove('hide-option');
+
+                        /**
+                        * Add `available-option` class to prevent hidding available options
+                        */
+                        this.TEMP_OPTIONS.add(`${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+                    }
+                    break;
                 case this.TYPE_RANGE:
                     /**
                     * Min, Max, Step, and Unit
@@ -853,13 +1310,19 @@ class MetaobjectTable extends HTMLElement {
                         * Update count label element and add `data-index` attribute
                         */
                         const countOfOptionMatchedEntries = document.querySelector(`li[data-index="${filter.index}${this.SEPERATOR}${filterOption[0]}"] span.item-count`);
-                        countOfOptionMatchedEntries.innerHTML = `(${filterOption[1]})`;
-
+                        
                         /**
-                        * Add `available-option` class to prevent hidding available options
-                        */
-                        const availableOptionOne = document.querySelector(`li[data-index="${filter.index}${this.SEPERATOR}${filterOption[0]}"]`);
-                        this.TEMP_OPTIONS.add(`${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+                         * Remove `hide-option` class
+                         */
+                        document.querySelector(`li[data-index="${filter.index}${this.SEPERATOR}${filterOption[0]}"]`).classList.remove('hide-option');
+
+                        if (countOfOptionMatchedEntries) {
+                            countOfOptionMatchedEntries.innerHTML = `(${filterOption[1]})`;
+                            /**
+                             * Add `data-index` attribute to TEMP_OPTIONS
+                            */
+                            this.TEMP_OPTIONS.add(`${filter.index}${this.SEPERATOR}${filterOption[0]}`);
+                        }
                     }
                     break;
                 default:
@@ -868,10 +1331,157 @@ class MetaobjectTable extends HTMLElement {
         }
     }
 
+    nextPage() {
+        this.CURRENT_PAGE_INDEX = Math.min(this.CURRENT_PAGE_INDEX + 1, this.PAGE_TOTAL);
+        this.drawTable(this.TEMP_DATA, this.CURRENT_PAGE_INDEX);
+    }
+
+    prevPage() {
+        this.CURRENT_PAGE_INDEX = Math.max(this.CURRENT_PAGE_INDEX - 1, 0);
+        this.drawTable(this.TEMP_DATA, this.CURRENT_PAGE_INDEX);
+    }
+
+    gotoPage(pageIndex) {
+        this.CURRENT_PAGE_INDEX = Number(pageIndex);
+        this.drawTable(this.TEMP_DATA, this.CURRENT_PAGE_INDEX);
+    }
+
+    buildPaginationButtons() {
+
+        /**
+         * Remove origin pagination buttons
+         */
+        this.paginationButtonBox.querySelector('.pagination')?.remove();
+
+        if (this.PAGE_TOTAL > 1) {
+            /**
+             * Create `pagination` div
+             */
+            const pagination = document.createElement('DIV');
+            pagination.classList.add('pagination');
+            this.paginationButtonBox.appendChild(pagination);
+
+            /**
+             * Add `Prev` button
+             */
+            if (this.CURRENT_PAGE_INDEX > 0) {
+                const prevButtonBox = document.createElement('SPAN');
+                prevButtonBox.classList.add('prev');
+                pagination.appendChild(prevButtonBox);
+
+                const prevButton = document.createElement('A');
+                prevButton.title = "Previous";
+                prevButton.innerHTML = this.PREV_BUTTON_ICON;
+                prevButtonBox.appendChild(prevButton);
+
+                prevButtonBox.addEventListener('click', this.prevPage.bind(this));
+            }
+
+            /**
+             * Add first button
+             */
+            const firstButton = document.createElement('SPAN');
+            firstButton.classList.add('page');
+            if (this.CURRENT_PAGE_INDEX == 0) {
+                firstButton.classList.add('current');
+                firstButton.innerHTML = 1;
+            } else {
+                const buttonContent = document.createElement('A');
+                buttonContent.innerHTML = 1;
+                firstButton.appendChild(buttonContent);
+            }
+            firstButton.setAttribute('data-pagination', 0);
+            pagination.appendChild(firstButton);
+            
+            firstButton.addEventListener('click', () => {
+                this.gotoPage(0);
+            });
+
+            /**
+             * Add `...` 
+             */
+            if (this.CURRENT_PAGE_INDEX > 3) {
+                const firstDots = document.createElement('SPAN');
+                firstDots.classList.add('page');
+                firstDots.innerHTML = this.DOTS_CONTENT;
+                pagination.appendChild(firstDots);
+            }
+
+            /** 
+             * Add 5 buttons of around current button if avilable  
+             */
+            for (let index = Math.max(1, this.CURRENT_PAGE_INDEX - 2); index <= Math.min(this.PAGE_TOTAL - 2, this.CURRENT_PAGE_INDEX + 2); index++) {
+                const paginationButton = document.createElement('SPAN');
+                paginationButton.classList.add('page');
+                if (this.CURRENT_PAGE_INDEX == index) {
+                    paginationButton.innerHTML = index + 1;
+                    paginationButton.classList.add('current');
+                } else {
+                    const buttonContent = document.createElement('A');
+                    buttonContent.innerHTML = index + 1;
+                    paginationButton.appendChild(buttonContent);
+                }
+                paginationButton.setAttribute('data-pagination', index);
+                pagination.appendChild(paginationButton);
+                
+                paginationButton.addEventListener('click', () => {
+                    this.gotoPage(index);
+                });
+            }
+
+            /**
+             * Add `...` 
+             */
+            if (this.CURRENT_PAGE_INDEX < this.PAGE_TOTAL - 3) {
+                const lastDots = document.createElement('SPAN');
+                lastDots.classList.add('page');
+                lastDots.innerHTML = this.DOTS_CONTENT;
+                pagination.appendChild(lastDots);
+            }
+
+            /**
+             * Add last button
+             */
+            const lastButton = document.createElement('SPAN');
+            lastButton.classList.add('page');
+            if (this.CURRENT_PAGE_INDEX == this.PAGE_TOTAL - 1) {
+                lastButton.classList.add('current');
+                lastButton.innerHTML = this.PAGE_TOTAL;
+            } else {
+                const buttonContent = document.createElement('A');
+                buttonContent.innerHTML = this.PAGE_TOTAL;
+                lastButton.appendChild(buttonContent);
+            }
+            
+            lastButton.setAttribute('data-pagination', this.PAGE_TOTAL - 1);
+            pagination.appendChild(lastButton);
+            
+            lastButton.addEventListener('click', () => {
+                this.gotoPage(this.PAGE_TOTAL - 1);
+            });
+
+            /**
+             * Add `next` button
+             */
+            if (this.CURRENT_PAGE_INDEX < this.PAGE_TOTAL) {
+                const nextButtonBox = document.createElement('SPAN');
+                nextButtonBox.classList.add('next');
+                pagination.appendChild(nextButtonBox);
+
+                const nextButton = document.createElement('A');
+                nextButton.title = "next";
+                nextButton.innerHTML = this.NEXT_BUTTON_ICON;
+                nextButtonBox.appendChild(nextButton);
+
+                nextButtonBox.addEventListener('click', this.nextPage.bind(this));
+            }
+        }
+    }
+
     /**
     * @Update_Pagination drawTable
     */
-    drawTable(data) {
+    drawTable(data, CURRENT_PAGE_INDEX) {
         /**
         * Delete origin TBODY and create new TBODY
         */
@@ -880,16 +1490,27 @@ class MetaobjectTable extends HTMLElement {
         this.table.appendChild(tbody);
         this.tbody = tbody;
 
-        /**
-        * Pagination button create and data reassign
-        * data = data.slice()
-        */
-        data = data.slice(this.CURRENT_PAGE_INDEX * this.ROWS_PER_PAGINATION, this.ROWS_PER_PAGINATION);
+        this.TEMP_DATA = data;
 
         /**
         * Update total count number
         */
         this.totalCount.innerHTML = data.length;
+
+        if (!CURRENT_PAGE_INDEX) {
+            /**
+             * Reassign `PAGE_TOTAL`
+             */
+            this.PAGE_TOTAL = parseInt(data.length / this.ROWS_PER_PAGINATION) + (data.length % this.ROWS_PER_PAGINATION == 0 ? 0 : 1);
+            this.CURRENT_PAGE_INDEX = 0;
+        }
+        
+        data = data.slice(this.CURRENT_PAGE_INDEX * this.ROWS_PER_PAGINATION, this.CURRENT_PAGE_INDEX * this.ROWS_PER_PAGINATION + this.ROWS_PER_PAGINATION);
+
+        /**
+         * Build pagination buttons
+         */
+        this.buildPaginationButtons();
 
         /**
         * Create TR elements
@@ -916,6 +1537,23 @@ class MetaobjectTable extends HTMLElement {
                 row.appendChild(col);
             })
         })
+
+    }
+
+    openDraw() {
+        this.classList.add('open');
+    }
+
+    closeDraw() {
+        this.classList.remove('open');
+    }
+
+    fitlerStart() {
+        this.classList.add('filtering');
+    }
+
+    filterEnd() {
+        this.classList.remove('filtering');
     }
 }
 
