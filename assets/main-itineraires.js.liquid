@@ -1,5 +1,5 @@
 /**
- * Define `metaoobject-table` custom element
+ * @class metaoobject_table custom element
 */
 class MetaobjectTable extends HTMLElement {
 
@@ -288,7 +288,7 @@ class MetaobjectTable extends HTMLElement {
         ];
 
         /**
-        * @Update Rows per pagination - will be dynamic value with a select box
+        * Pagination
         */
         this.ROWS_PER_PAGINATION = 30;
         this.CURRENT_PAGE_INDEX = 0;
@@ -306,13 +306,19 @@ class MetaobjectTable extends HTMLElement {
         /**
          * Event handler for draw opener
          */
-        this.drawOpenButton.addEventListener('click', this.openDraw.bind(this));
-        this.drawBackLayout.addEventListener('click', this.closeDraw.bind(this));
-        this.drawCloseButton.addEventListener('click', this.closeDraw.bind(this));
+        this.drawOpenButton.addEventListener('click', this.openDrawer.bind(this));
+        this.drawBackLayout.addEventListener('click', this.closeDrawer.bind(this));
+        this.drawCloseButton.addEventListener('click', this.closeDrawer.bind(this));
 
+        /**
+         * Initialize
+         */
         this.init();
     }
 
+    /**
+     * @func Init
+     */
     init() {
         /**
          * Build Filter bar
@@ -335,7 +341,8 @@ class MetaobjectTable extends HTMLElement {
     }
 
     /**
-     * Number range event handler
+     * @func NumberRange event handler
+     * @param event | Event* 
      */
     numberRange(event) {
         /**
@@ -406,10 +413,18 @@ class MetaobjectTable extends HTMLElement {
     }
 
     /**
-    * Search event handler
+    * @func Search event handler
+    * @param event | Event*
     */
     search(event) {
+        /**
+         * Get keyword
+         */
         const keyWord = event.target.value;
+
+        /**
+         * set condition
+         */
         this.setCondition({
             type: this.CONDITION_SEARCH,
             value: keyWord
@@ -417,8 +432,8 @@ class MetaobjectTable extends HTMLElement {
     }
 
     /**
-    * Range event handler
-    * @Update
+    * @func Range event handler
+    * @param event | Event*
     */
     range(event) {
         /**
@@ -445,7 +460,8 @@ class MetaobjectTable extends HTMLElement {
     }
 
     /**
-    * Fitler event handler
+    * @func Fitler event handler
+    * @param event | Event*
     */
     filter(event) {
         /**
@@ -503,7 +519,8 @@ class MetaobjectTable extends HTMLElement {
     }
 
     /**
-    * Sort event handler
+    * @func Sort event handler
+    * @param event | Event*
     */
     sort(event) {
         const sortValue = event.target.value;
@@ -514,8 +531,8 @@ class MetaobjectTable extends HTMLElement {
     }
 
     /**
-    * Set condition for filtering
-    * @Add range case
+    * @func SetCondition for filtering
+    * @param obj | Object*
     */
     setCondition(obj) {
         switch (obj.type) {
@@ -524,18 +541,32 @@ class MetaobjectTable extends HTMLElement {
             * Number Range min and max value
             */
             case this.CONDITION_RANGE_CHECKBOX:
+                
+                /**
+                 * Get origin condition
+                 */
                 let condition_range_checkbox = this.CONDITIONS.get(this.CONDITION_RANGE_CHECKBOX).get(obj.index);
 
+                /**
+                 * If the origin condition is null, init with Map Object
+                 */
                 condition_range_checkbox = condition_range_checkbox ? condition_range_checkbox : new Map();
 
+                /**
+                 * Add or remove by obj.action to `condition_range_checkbox`
+                 */
                 if (obj.action == this.ACTION_ADD) condition_range_checkbox.set(obj.block, {
                     min: obj.min,
                     max: obj.max
                 });
                 else condition_range_checkbox.delete(obj.block);
 
+                /**
+                 * If `condition_range_checkbox` has values, add update conditions, and if its length is 0, delete condition
+                 */
                 if (condition_range_checkbox.size === 0) this.CONDITIONS.get(this.CONDITION_RANGE_CHECKBOX).delete(obj.index);
                 else this.CONDITIONS.get(this.CONDITION_RANGE_CHECKBOX).set(obj.index, condition_range_checkbox);
+
                 break;
 
             /**
@@ -552,13 +583,25 @@ class MetaobjectTable extends HTMLElement {
             * Filter options add/remove
             */
             case this.CONDITION_CHECKBOX:
+                /**
+                 * Get origin value
+                 */
                 let condition = this.CONDITIONS.get(this.CONDITION_CHECKBOX).get(obj.index);
 
+                /**
+                 * If the origin value is null, init with Set Object
+                 */
                 condition = condition ? condition : new Set();
 
+                /**
+                 * Add or remove byt obj.action to `condition`
+                 */
                 if (obj.action == this.ACTION_ADD) condition.add(obj.value);
                 else condition.delete(obj.value);
 
+                /**
+                 * If its size is 0, delete conditions, and if it has values, add to conditions
+                 */
                 if (condition.size === 0) this.CONDITIONS.get(this.CONDITION_CHECKBOX).delete(obj.index);
                 else this.CONDITIONS.get(this.CONDITION_CHECKBOX).set(obj.index, condition);
                 break;
@@ -580,15 +623,22 @@ class MetaobjectTable extends HTMLElement {
             default:
                 break;
         }
+
+        /**
+         * filterByConditions
+         */
         this.filterByConditions(obj);
     }
 
     /**
-    * filterByCondition
-    * @UPDATE_FOR_RANGE_CHECKBOX
+    * @func filterByConditions
+    * @param obj | Object*
     */
     filterByConditions(obj) {
 
+        /**
+         * Assign DATA to new variable for filtering and sorting
+         */
         let data = this.DATA;
 
         /**
@@ -614,9 +664,12 @@ class MetaobjectTable extends HTMLElement {
             );
 
         /**
-         * For filterable entires counting 
+         * Init new Map Object for filterable entires counting 
          */
         const filterCountData = new Map();
+        /**
+         * Assign data to all filterCountData object's values
+         */
         this.FILTERS.map(headerIndex => filterCountData.set(headerIndex, data));
         
         /**
@@ -628,7 +681,13 @@ class MetaobjectTable extends HTMLElement {
              */
             if (this.HEADER[key].isArray) {
                 data = data.filter(item => item[parseInt(key)].value.findIndex(subItem => value.has(subItem)) > -1);
+                /**
+                 * Update filterCountData
+                 */
                 filterCountData.forEach((filterDataValue, filterDataKey) => {
+                    /**
+                     * Skip if its key and current filtering key is same for counting available entries number on filter bar
+                     */
                     if (filterDataKey != key) {
                         const updatedFilterData = filterDataValue.filter(item => item[parseInt(key)].value.findIndex(subItem => value.has(subItem)) > -1);
                         filterCountData.set(filterDataKey, updatedFilterData);
@@ -637,7 +696,13 @@ class MetaobjectTable extends HTMLElement {
             }
             else {
                 data = data.filter(item => value.has(item[parseInt(key)].value));
+                /**
+                 * Update filterCountData
+                 */
                 filterCountData.forEach((filterDataValue, filterDataKey) => {
+                    /**
+                     * Skip if its key and current filtering key is same for counting available entries number on filter bar
+                     */
                     if (filterDataKey != key) {
                         const updatedFilterData = filterDataValue.filter(item => value.has(item[parseInt(key)].value));
                         filterCountData.set(filterDataKey, updatedFilterData);
@@ -654,12 +719,25 @@ class MetaobjectTable extends HTMLElement {
                 const itemValue = Number(item[parseInt(key)].value)
                 return value.min <= itemValue && itemValue <= value.max
             });
+
+            /**
+             * Update filterCountData
+             */
             filterCountData.forEach((filterDataValue, filterDataKey) => {
+                /**
+                 * Skip if its key and current filtering key is same for counting available entries number on filter bar
+                 */
                 if (filterDataKey != key) {
+                    /**
+                     * Filter for range
+                     */
                     const updatedFilterData = filterDataValue.filter(item => {
                         const itemValue = Number(item[parseInt(key)].value)
                         return value.min <= itemValue && itemValue <= value.max
                     });
+                    /**
+                     * Update data
+                     */
                     filterCountData.set(filterDataKey, updatedFilterData);
                 }
             })
@@ -695,7 +773,14 @@ class MetaobjectTable extends HTMLElement {
              */
             TempData.slice(TempData.length);
             
+            /**
+             * filterCountData update
+             */
             filterCountData.forEach((filterDataValue, filterDataKey) => {
+
+                /**
+                 * If its key and current filtering key is same, skip to display all available entry numbers on filter bar
+                 */
                 if (filterDataKey != key) {
 
                     /**
@@ -809,16 +894,35 @@ class MetaobjectTable extends HTMLElement {
                     break;
 
                 default:
+                    /**
+                     * Default sort TITLE_ASC sorting
+                     */
+                    data.sort((a, b) => a[this.SORTS[this.SORT_TITRE_ASC]].value
+                        .localeCompare(b[this.SORTS[this.SORT_TITRE_ASC]].value));
                     break;
             }
+        } else {
+            /**
+             * Default sort TITLE_ASC sorting
+             */
+            data.sort((a, b) => a[this.SORTS[this.SORT_TITRE_ASC]].value.localeCompare(b[this.SORTS[this.SORT_TITRE_ASC]].value));
         }
 
+        /**
+         * Update fitler bar
+         */
         this.drawFilterBar(filterCountData, obj);
+
+        /**
+         * Update table
+         */
         this.drawTable(data);
     }
 
     /**
-    * drawFilterBar
+    * @func DrawFilterBar
+    * @param data | Array*
+    * @param UPDATED_FILTER_OBJECT | Object, default is null
     */
     drawFilterBar(data, UPDATED_FILTER_OBJECT) {
         /**
@@ -826,6 +930,9 @@ class MetaobjectTable extends HTMLElement {
         */
         const dataMapped = [];
         if (UPDATED_FILTER_OBJECT) data.forEach((value, key) => {
+            /**
+             * If UPDATED_FILTER_OBJECT true, map
+             */
             value.map(item => {
                 item.map((field, ind) => {
                     if (key == ind) {
@@ -842,8 +949,14 @@ class MetaobjectTable extends HTMLElement {
             })
         });
 
+        /**
+         * Init TEMP_OPTIONS to hide unavailable options if UPDATED_FILTER_OBJECT true
+         */
         if (UPDATED_FILTER_OBJECT) this.TEMP_OPTIONS = new Set();
 
+        /**
+         * Map FILTERS for trigger updated values with param data
+         */
         this.FILTERS.forEach(headerIndex => {
 
             let item = this.HEADER[headerIndex];
@@ -956,16 +1069,32 @@ class MetaobjectTable extends HTMLElement {
             })
         }
 
+        /**
+         * Remove activated tags all
+         */
         this.activatedTagsBox.innerHTML = "";
 
+        /**
+         * Create activated tags
+         */
         document.querySelectorAll('UL.checked li.filter-option.checked').forEach(item => {
+            /**
+             * Get label
+             */
             const tagLabel = item.querySelector('.checkbox-label').innerHTML.replace(this.REG_EX_LABEL, "");
+
+            /**
+             * Create LI element 
+             */
             const filterTag = document.createElement('LI');
             filterTag.classList.add('tag');
             filterTag.classList.add('tag--remove');
             filterTag.innerHTML = `<a class="btn btn--small">${tagLabel}</a><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"></path></svg>`;
             this.activatedTagsBox.appendChild(filterTag);
 
+            /**
+             * Event handler
+             */
             filterTag.addEventListener('click', (event) => {
                 item.click();
             })
@@ -973,7 +1102,8 @@ class MetaobjectTable extends HTMLElement {
     }
 
     /**
-    * updateOrCreateFilterOption
+    * @func UpdateOrCreateFilterOption
+    * @param fitler | Object*
     */
     updateOrCreateFilterOption(filter) {
 
@@ -1331,21 +1461,48 @@ class MetaobjectTable extends HTMLElement {
         }
     }
 
+    /**
+     * @func NextPage in pagination
+     */
     nextPage() {
+        /**
+         * Increament CURRENT_PAGE_INDEX
+         */
         this.CURRENT_PAGE_INDEX = Math.min(this.CURRENT_PAGE_INDEX + 1, this.PAGE_TOTAL);
+
+        /**
+         * Update table
+         */
         this.drawTable(this.TEMP_DATA, this.CURRENT_PAGE_INDEX);
     }
 
+    /**
+     * @func PrevPage in pagination
+     */
     prevPage() {
         this.CURRENT_PAGE_INDEX = Math.max(this.CURRENT_PAGE_INDEX - 1, 0);
         this.drawTable(this.TEMP_DATA, this.CURRENT_PAGE_INDEX);
     }
 
+    /**
+     * @func Goto page in pagination
+     * @param pageIndex | INT*
+     */
     gotoPage(pageIndex) {
+        /**
+         * Assign pageIndex to CURRENT_PAGE_INDEX
+         */
         this.CURRENT_PAGE_INDEX = Number(pageIndex);
+        
+        /**
+         * Update drawTable
+         */
         this.drawTable(this.TEMP_DATA, this.CURRENT_PAGE_INDEX);
     }
 
+    /**
+     * @func BuildPaginationButtons
+     */
     buildPaginationButtons() {
 
         /**
@@ -1479,7 +1636,9 @@ class MetaobjectTable extends HTMLElement {
     }
 
     /**
-    * @Update_Pagination drawTable
+    * @func DrawTable
+    * @param data | Array*
+    * @param CURRENT_PAGE_INDEX | INT
     */
     drawTable(data, CURRENT_PAGE_INDEX) {
         /**
@@ -1490,6 +1649,9 @@ class MetaobjectTable extends HTMLElement {
         this.table.appendChild(tbody);
         this.tbody = tbody;
 
+        /**
+         * Assign data to `TEMP_DATA` for pagination
+         */
         this.TEMP_DATA = data;
 
         /**
@@ -1505,6 +1667,9 @@ class MetaobjectTable extends HTMLElement {
             this.CURRENT_PAGE_INDEX = 0;
         }
         
+        /**
+         * Slice for pagination
+         */
         data = data.slice(this.CURRENT_PAGE_INDEX * this.ROWS_PER_PAGINATION, this.CURRENT_PAGE_INDEX * this.ROWS_PER_PAGINATION + this.ROWS_PER_PAGINATION);
 
         /**
@@ -1523,44 +1688,77 @@ class MetaobjectTable extends HTMLElement {
             * Create TD elements
             */
             item.map((column, index) => {
+                /**
+                 * If hidden column skip creating
+                 */
                 if (!this.HEADER[index].visible) return;
+
+                /**
+                 * TD element create
+                 */
                 const col = document.createElement('TD');
+
+                /**
+                 * HTML insert
+                 */
                 col.innerHTML = column.html;
+                
+                /**
+                 * Truncate string
+                 */
                 if (this.HEADER[index].maxLength) {
+
+                    /**
+                     * Text trigger
+                     */
                     let innerText = column.html.replace(this.REG_EX, '');
+                    
+                    /**
+                     * If length of text is long than maxLength, truncate
+                     */
                     if (innerText.length > this.HEADER[index].maxLength) {
+                    
+                        /**
+                         * Replace with `...` last 3 characters
+                         */
                         let newInnerText = innerText.slice(0, (this.HEADER[index].maxLength - 3)) + "...";
                         col.innerHTML = column.html.replace(innerText, newInnerText);
-                        col.setAttribute('data-title', column.value);
+
+                        /**
+                         * Set `data-title` for tooltip component
+                         */
+                        col.setAttribute('data-title', column.value);                    
                     }
                 }
+
+                /**
+                 * Append to row element
+                 */
                 row.appendChild(col);
             })
         })
 
     }
 
-    openDraw() {
+    /**
+     * @func OpenDrawer
+     */
+    openDrawer() {
         this.classList.add('open');
     }
-
-    closeDraw() {
+    
+    /**
+     * @func CloseDrawer
+     */
+    closeDrawer() {
         this.classList.remove('open');
-    }
-
-    fitlerStart() {
-        this.classList.add('filtering');
-    }
-
-    filterEnd() {
-        this.classList.remove('filtering');
     }
 }
 
 customElements.define('metaobject-table', MetaobjectTable);
 
 /**
- * Define `filter-option-box` custom element for filter bar
+ * @class FilterOptionBox custom element for filter bar
 */
 class filterOptionBox extends HTMLElement {
     constructor() {
@@ -1579,7 +1777,7 @@ class filterOptionBox extends HTMLElement {
     }
 
     /**
-    * Toggle UL element
+    * @func ToggleUL 
     */
     toggleUL(event) {
         if (this.classList.contains('open')) this.classList.remove('open');
@@ -1587,7 +1785,8 @@ class filterOptionBox extends HTMLElement {
     }
 
     /**
-    * Toggle LI checkbox element
+    * @func ToggleLI
+    * @param event | Event*
     */
     toggleLI(event) {
         if (event.target.tagName == 'LI') event.target.querySelector('input[type="checkbox"]')?.click();
