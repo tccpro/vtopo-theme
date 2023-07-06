@@ -1,4 +1,4 @@
 development:
-  password:
+  password: "<private_key>"
   theme_id: "129138491590"
   store: vtopo.myshopify.com
